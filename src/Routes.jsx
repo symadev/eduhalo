@@ -6,6 +6,7 @@ import MainLayout from "./Components/MainLayout";
 import Home from "./Components/Home";
 
 
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -15,7 +16,9 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
 
-      }
+      },
+      
+      
     ]
   },
 ]);

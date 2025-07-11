@@ -1,0 +1,132 @@
+import Modal from "react-modal";
+import { useContext } from "react";
+import { useNavigate, useLocation, Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { AuthContext } from "../Context/AuthContext";
+import logo from "../../assets/images/hat.png"
+// Required by react-modal
+Modal.setAppElement("#root");
+
+const Login = ({ isOpen, onRequestClose, openRegister }) => {
+   
+  const { signIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    const role = form.role.value;
+
+    signIn(email, password, role)
+      .then(() => {
+        toast.success("Login Successful");
+        onRequestClose(); // close modal
+        navigate(from, { replace: true });
+      })
+      .catch((err) => {
+        toast.error("Login Failed: " + err.message);
+      });
+  };
+
+  return (
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={onRequestClose}
+      contentLabel="Login"
+      overlayClassName="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50"
+      className="bg-gradient-to-br from-[#FFF8F5] via-[#FFF0EA] to-[#FFEBE5] text-gray-800 p-6 rounded-2xl w-full max-w-sm border border-pink-200/50 relative shadow-xl"
+    >
+      <button
+        onClick={onRequestClose}
+        className="absolute top-3 right-3 text-gray-500 hover:text-pink-600 text-xl transition-colors duration-200"
+      >
+        &times;
+      </button>
+
+      <div className="text-center mb-6">
+         <div className="inline-block p-2 rounded-full bg-gradient-to-br from-purple-100 via-pink-100 to-orange-100 mb-3 shadow-md">
+                 <img className="w-8 h-8" src={logo} alt="" />
+                   
+                 
+                </div>
+        <h2 className="text-2xl font-bold text-[#111430] mb-1">
+          Welcome to EduHalo
+        </h2>
+        <p className="text-sm text-gray-600">
+          Access your educational portal
+        </p>
+      </div>
+
+      <form onSubmit={handleLogin} className="space-y-4">
+        <div>
+          <label className="block text-sm text-gray-700 mb-1 font-medium">Email</label>
+          <input
+            type="email"
+            name="email"
+            required
+            className="w-full px-3 py-2 bg-white/80 border border-pink-200 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition-all duration-200 text-gray-800"
+            placeholder="example@email.com"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm text-gray-700 mb-1 font-medium">Password</label>
+          <input
+            type="password"
+            name="password"
+            required
+            className="w-full px-3 py-2 bg-white/80 border border-pink-200 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition-all duration-200 text-gray-800"
+            placeholder="••••••••"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm text-gray-700 mb-1 font-medium">Role</label>
+          <select 
+            name="role"
+            required
+            className="w-full px-3 py-2 bg-white/80 border border-pink-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition-all duration-200 text-gray-800 appearance-none cursor-pointer"
+          >
+            <option value="" className="bg-white text-gray-800">Select your role</option>
+            <option value="parent" className="bg-white text-gray-800">👨‍👩‍👧‍👦 Parent</option>
+            <option value="teacher" className="bg-white text-gray-800">👩‍🏫 Teacher</option>
+            <option value="admin" className="bg-white text-gray-800">⚡ Admin</option>
+          </select>
+        </div>
+
+        <button
+          type="submit"
+          className="w-full py-2.5 bg-gradient-to-r from-pink-500 to-orange-500 text-white font-semibold rounded-lg hover:from-pink-600 hover:to-orange-600 transform hover:scale-105 transition-all duration-200 shadow-md"
+        >
+          🚀 Login to EduHalo
+        </button>
+      </form>
+
+      <div className="flex justify-between items-center mt-4 text-sm text-gray-600">
+        <Link
+          to="/forgot-password"
+          className="hover:text-pink-600 transition-colors duration-200"
+        >
+          Forgot Password?
+        </Link>
+
+        <button
+          type="button"
+          onClick={() => {
+            onRequestClose();
+            openRegister();
+          }}
+          className="hover:text-pink-600 transition-colors duration-200"
+        >
+          Sign Up
+        </button>
+      </div>
+    </Modal>
+  );
+};
+
+export default Login;
