@@ -1,9 +1,31 @@
 import { Link } from "react-router-dom";
 import image from "../assets/images/hat.png";
 import { useState } from "react";
+import Login from "./pages/Login";
+import SignUp from "./pages/Signup";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+
+
+    // Modal visibility states
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+
+  // Functions to open/close modals
+  const openLogin = () => {
+    setShowRegisterModal(false);
+    setShowLoginModal(true);
+  };
+
+  const openRegister = () => {
+    setShowLoginModal(false);
+    setShowRegisterModal(true);
+  };
+
+  const closeLogin = () => setShowLoginModal(false);
+  const closeRegister = () => setShowRegisterModal(false);
 
   return (
     <div className="bg-gradient-to-r from-[#FFF8F5] via-[#FFF0EA] to-[#FFF8F5] shadow-lg backdrop-blur-md fixed top-0 left-0 w-full z-50 border-b border-pink-100">
@@ -49,8 +71,8 @@ const Navbar = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-pink-100 to-orange-100 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </Link>
           
-          <Link 
-            to="/dashboard" 
+          <Link   onClick={openLogin}
+           
             className="ml-4 px-6 py-2 bg-gradient-to-r from-pink-500 to-orange-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 hover:from-pink-600 hover:to-orange-600"
           >
             Login/SignUp
@@ -67,6 +89,24 @@ const Navbar = () => {
           <div className={`w-6 h-0.5 bg-gray-700 transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></div>
         </button>
       </div>
+
+
+
+
+
+        {/* Login Modal */}
+      <Login
+        isOpen={showLoginModal}
+        onRequestClose={closeLogin}
+        openRegister={openRegister} // So Login modal can open Register modal
+      />
+
+      {/* Register Modal */}
+      <SignUp
+        isOpen={showRegisterModal}
+        onRequestClose={closeRegister}
+        openLogin={openLogin} // So Register modal can open Login modal
+      />
 
       {/* Mobile Menu */}
       <div className={`md:hidden bg-white border-t border-pink-100 transition-all duration-300 ${isMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
@@ -93,7 +133,7 @@ const Navbar = () => {
             Contact
           </Link>
           <Link 
-            to="/dashboard" 
+            to="/login" 
             className="block mx-4 mt-4 px-6 py-3 bg-gradient-to-r from-pink-500 to-orange-500 text-white font-semibold rounded-full text-center shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
             onClick={() => setIsMenuOpen(false)}
           >
