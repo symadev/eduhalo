@@ -1,4 +1,4 @@
-import image from '../assets/images/1.png';
+import image from '../assets/images/banner.png';
 import { useState, useEffect } from 'react';
 
 const Banner = () => {
