@@ -7,7 +7,7 @@ const WorksCard = ({ card, index }) => {
   return (
     <div 
       className={`relative flex items-start gap-6 p-6 rounded-2xl transition-all duration-300 ${
-        isHovered ? 'bg-gradient-to-br from-pink-50 via-white to-orange-50 transform -translate-y-1' : 'bg-white'
+        isHovered ? 'bg-gradient-to-br from-pink-50 via-white to-orange-50 transform -translate-y-1' : 'bg-[#FFF0EA]'
       } shadow-lg hover:shadow-2xl border border-gray-100`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
