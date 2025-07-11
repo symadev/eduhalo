@@ -1,4 +1,5 @@
 import Banner from "./Banner";
+import Feature from "./Feature";
 import Works from "./Works";
 
 
@@ -7,6 +8,7 @@ const Home = () => {
         <div>
             <Banner></Banner>
             <Works></Works>
+            <Feature></Feature>
             
         </div>
     );

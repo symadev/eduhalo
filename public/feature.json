@@ -1,31 +1,31 @@
 [
   {
-    "icon": "📝",
+    "icon": "../src/assets/images/teacher task.png",
     "title": "Teachers Assign Tasks",
     "description": "Teachers can assign homework, classwork, or learning materials that students and parents can instantly access."
   },
   {
-    "icon": "📅",
+    "icon": "../src/assets/images/updates.png",
     "title": "Attendance Updates",
     "description": "Get real-time updates on daily attendance to keep track of student presence and punctuality."
   },
   {
-    "icon": "📄",
+    "icon": "../src/assets/images/pdf fil.png",
     "title": "Result & Report in PDF",
     "description": "Download student results and academic reports in PDF format anytime from your dashboard."
   },
   {
-    "icon": "🔔",
+    "icon": "../src/assets/images/notification.png",
     "title": "Instant Notifications",
     "description": "Receive alerts about class updates, teacher uploads, and schedule changes instantly."
   },
   {
-    "icon": "🗓️",
+    "icon": "../src/assets/images/class routine.png",
     "title": "Class Routine Overview",
     "description": "Access and follow your class schedule in a clean, organized calendar view."
   },
   {
-    "icon": "💬",
+    "icon": "../src/assets/images/both message.png",
     "title": "Parent-Teacher Messaging",
     "description": "Directly message teachers to ask questions, share feedback, or follow up on academic progress."
   }
