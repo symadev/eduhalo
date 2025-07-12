@@ -73,7 +73,7 @@ const onSubmit = async (data) => {
             type="text"
             {...register("name", { required: "Name is required" })}
             placeholder="John Doe"
-            className="w-full px-3 py-2 bg-white/80 border border-pink-200 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition-all duration-200 text-gray-800"
+            className="w-full px-3 py-2 bg-white/80 border border-pink-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition-all duration-200 text-gray-800"
           />
           {errors.name && <p className="text-pink-600 text-sm mt-1">{errors.name.message}</p>}
         </div>
@@ -85,7 +85,7 @@ const onSubmit = async (data) => {
             type="email"
             {...register("email", { required: "Email is required" })}
             placeholder="you@example.com"
-            className="w-full px-3 py-2 bg-white/80 border border-pink-200 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition-all duration-200 text-gray-800"
+            className="w-full px-3 py-2 bg-white/80 border border-pink-200 rounded-lg  focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition-all duration-200 text-gray-800"
           />
           {errors.email && <p className="text-pink-600 text-sm mt-1">{errors.email.message}</p>}
         </div>
@@ -100,7 +100,7 @@ const onSubmit = async (data) => {
               minLength: { value: 6, message: "Password must be at least 6 characters" },
             })}
             placeholder="••••••••"
-            className="w-full px-3 py-2 bg-white/80 border border-pink-200 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition-all duration-200 text-gray-800"
+            className="w-full px-3 py-2 bg-white/80 border border-pink-200 rounded-lg  focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition-all duration-200 text-gray-800"
           />
           {errors.password && <p className="text-pink-600 text-sm mt-1">{errors.password.message}</p>}
         </div>
