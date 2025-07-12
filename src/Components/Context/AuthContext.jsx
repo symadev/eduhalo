@@ -1,23 +1,25 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import UseAxiosPublic from "./UseAxiosPublic";
 
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const axiosPublic = UseAxiosPublic();
 
   const createUser = async (name, email, password, role = "parent") => {
-    const res = await axios.post("/api/signup", { name, email, password, role });
-    return res.data;
-  };
+  const res = await axiosPublic.post("/signup", { name, email, password, role });
+  return res.data;
+};
 
-  const signIn = async (email, password, role) => {
-    const res = await axios.post("/api/login", { email, password, role });
-    localStorage.setItem("token", res.data.token);
-    setUser(res.data.user);
-    return res.data;
-  };
+const signIn = async (email, password, role) => {
+  const res = await axiosPublic.post("/login", { email, password, role });
+  localStorage.setItem("token", res.data.token);
+  setUser(res.data.user);
+  return res.data;
+};
 
   const logOut = () => {
     setUser(null);
@@ -33,7 +35,7 @@ const AuthProvider = ({ children }) => {
     }
 
     try {
-      const res = await axios.get("/api/me", {
+      const res = await axios.get("/me", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUser(res.data);
@@ -44,6 +46,14 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   };
+
+
+
+//   When a user logs in, you store their token in localStorage.
+// Now if they refresh the page, your app loses state (e.g., the user variable is reset).
+// getMe() checks if a token exists and re-authenticates the user.
+
+
 
   useEffect(() => {
     getMe();
