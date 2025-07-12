@@ -1,9 +1,9 @@
 import Modal from "react-modal";
-import { Link, useNavigate } from "react-router-dom";
+
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
-import UseAxiosPublic from "../Context/UseAxiosPublic";
+
 import { toast } from "react-toastify";
 import logo from "../../assets/images/hat.png"
 
@@ -11,37 +11,28 @@ Modal.setAppElement("#root");
 
 const SignUp = ({ isOpen, onRequestClose, openLogin }) => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
-  const { createUser } = useContext(AuthContext);
-  const navigate = useNavigate();
-  const axiosPublic = UseAxiosPublic();
 
-  const onSubmit = (data) => {
-    createUser(data.email, data.password)
-      .then(() => {
-        const newUser = {
-          name: data.name,
-          email: data.email,
-          role: 'user',
-          createdAt: new Date(),
-        };
 
-        axiosPublic.post('/users', newUser)
-          .then(res => {
-            if (res.data.insertedId) {
-              toast.success("SignUp Done!");
-              reset();
-              onRequestClose();      // ✅ close modal
-              navigate('/');         // ✅ redirect to homepage
-            }
-          })
-          .catch(() => {
-            toast.error('Failed to save user data');
-          });
-      })
-      .catch(() => {
-        toast.error('Something went wrong during SignUp');
-      });
-  };
+ // SignUp.jsx
+const { createUser } = useContext(AuthContext);
+
+const onSubmit = async (data) => {
+  try {
+    const res = await createUser(data.name, data.email, data.password, data.role);
+    if (res.success) {
+      toast.success("SignUp Done!");
+      reset();
+      onRequestClose();
+      navigate("/");
+    } else {
+      toast.error("Signup failed: " + res.message);
+    }
+  } catch (err) {
+    toast.error("Signup error: " + err.message);
+  }
+};
+
+
 
   return (
     <Modal
@@ -119,7 +110,7 @@ const SignUp = ({ isOpen, onRequestClose, openLogin }) => {
           type="submit"
           className="w-full py-2.5 bg-gradient-to-r from-pink-500 to-orange-500 text-white font-semibold rounded-lg hover:from-pink-600 hover:to-orange-600 transform hover:scale-105 transition-all duration-200 shadow-md"
         >
-          🚀 Register
+           SignUp
         </button>
       </form>
 
