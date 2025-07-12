@@ -5,7 +5,7 @@ import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from 'react-icons/f
 
 const Footer = () => {
     return (
-        <footer className="bg-[#FFEBE5]  text-gray-800 py-12 sm:py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <footer  id="contact" className="bg-[#FFEBE5]    text-gray-800 py-12 sm:py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
             {/* Animated Background Elements */}
             <div className="absolute inset-0 overflow-hidden">
                 <div className="absolute top-10 left-10 w-16 h-16 bg-pink-200 rounded-full opacity-20 animate-pulse"></div>

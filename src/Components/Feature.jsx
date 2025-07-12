@@ -31,6 +31,29 @@ const Feature = () => {
     return () => observer.disconnect();
   }, []);
 
+
+
+
+
+
+
+
+
+
+
+
+//    IntersectionObserver হলো একটি JavaScript API যা কোনো DOM এলিমেন্ট ব্রাউজারের ভিউপোর্টে আসছে কিনা সেটা ট্র্যাক করে।
+
+//  কী হচ্ছে এখানে?
+// observer একটি নতুন IntersectionObserver অবজেক্ট তৈরি করছে।
+
+// এটি একটি কলব্যাক ফাংশন নিচ্ছে [entry] => { ... } – এই entry হলো সেই অবজেক্ট যা বলে দিচ্ছে এলিমেন্ট স্ক্রিনে এসেছে কিনা।
+
+// entry.isIntersecting যদি true হয়, তাহলে setIsVisible(true) কল হয় – অর্থাৎ স্ক্রিনে দেখা যাচ্ছে, এখন সেটি ভিজিবল।
+
+//  threshold: 0.1
+// মানে, যদি এলিমেন্টের ১০% অংশ স্ক্রিনে দেখা যায়, তখনই এটি ট্রিগার করবে।
+
   return (
     <div id="feature-section" className="relative bg-[#FFEBE5] py-20 overflow-hidden">
       {/* Animated Background Elements */}

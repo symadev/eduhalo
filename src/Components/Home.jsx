@@ -7,9 +7,16 @@ const Home = () => {
     return (
         <div>
             <Banner></Banner>
-            <Works></Works>
-            <Feature></Feature>
-            
+            <section id="">
+                <Works></Works>
+            </section>
+            <section id="features">
+                <Feature></Feature>
+            </section>
+
+
+
+
         </div>
     );
 };
