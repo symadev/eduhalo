@@ -1,35 +1,37 @@
 import Modal from "react-modal";
 import { useContext } from "react";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+
 import { toast } from "react-toastify";
 import { AuthContext } from "../Context/AuthContext";
 import logo from "../../assets/images/hat.png"
+import { Link, useNavigate } from "react-router-dom";
 // Required by react-modal
 Modal.setAppElement("#root");
+// Add this on top
+
 
 const Login = ({ isOpen, onRequestClose, openRegister }) => {
    
-  const { signIn } = useContext(AuthContext);
-  const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  // Login.jsx
+const { signIn } = useContext(AuthContext);
+const navigate = useNavigate();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const email = form.email.value;
-    const password = form.password.value;
-    const role = form.role.value;
+const handleLogin = async (e) => {
+  e.preventDefault();
+  const email = e.target.email.value;
+  const password = e.target.password.value;
+  const role = e.target.role.value;
 
-    signIn(email, password, role)
-      .then(() => {
-        toast.success("Login Successful");
-        onRequestClose(); // close modal
-        navigate(from, { replace: true });
-      })
-      .catch((err) => {
-        toast.error("Login Failed: " + err.message);
-      });
+  try {
+    const res = await signIn(email, password, role);
+    toast.success("Login Successful");
+    onRequestClose();
+    navigate("/");
+  } catch (err) {
+    toast.error("Login Failed: " + err.response?.data?.message || err.message);
+  }
+
+
   };
 
   return (
@@ -102,7 +104,7 @@ const Login = ({ isOpen, onRequestClose, openRegister }) => {
           type="submit"
           className="w-full py-2.5 bg-gradient-to-r from-pink-500 to-orange-500 text-white font-semibold rounded-lg hover:from-pink-600 hover:to-orange-600 transform hover:scale-105 transition-all duration-200 shadow-md"
         >
-          🚀 Login to EduHalo
+           Login to EduHalo
         </button>
       </form>
 

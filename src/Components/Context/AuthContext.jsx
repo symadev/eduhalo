@@ -1,91 +1,64 @@
 import { createContext, useState, useEffect } from "react";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  GoogleAuthProvider,
-} from "firebase/auth";
-import { app } from "../Firebase/Firebase";
-import UseAxiosPublic from "./UseAxiosPublic";
-
-
+import axios from "axios";
 
 export const AuthContext = createContext(null);
 
-const auth = getAuth(app);
-
 const AuthProvider = ({ children }) => {
-  const googleProvider = new GoogleAuthProvider();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-   const axiosPublic = UseAxiosPublic()
 
-  
-
-  const createUser = (email, password) => {
-    setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
+  const createUser = async (name, email, password, role = "parent") => {
+    const res = await axios.post("/api/signup", { name, email, password, role });
+    return res.data;
   };
 
-  const signIn = (email, password) => {
-    setLoading(true);
-    return signInWithEmailAndPassword(auth, email, password);
-  };
-
-  const googleSignIn = () => {
-    setLoading(true);
-    return signInWithPopup(auth, googleProvider);
+  const signIn = async (email, password, role) => {
+    const res = await axios.post("/api/login", { email, password, role });
+    localStorage.setItem("token", res.data.token);
+    setUser(res.data.user);
+    return res.data;
   };
 
   const logOut = () => {
-    setLoading(true);
-    localStorage.removeItem("access-token");
-    return signOut(auth);
+    setUser(null);
+    localStorage.removeItem("token");
   };
 
-  // Get JWT token when user is authenticated
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+  const getMe = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setUser(null);
       setLoading(false);
+      return;
+    }
 
-      if (currentUser) {
-       const userINfo = {email:currentUser.email}
-      axiosPublic.post('/jwt',userINfo)
-        .then (res=>{
-          if(res.data.token){
-            localStorage.setItem('access-token', res.data.token)
-            //needed two arguments
-          }
-          else {
-            //do something:remove token (if the token store in the client sight(like,localstorage,chasing,memory))
-            localStorage.removeItem('access-token')
-          }
-        })
-      }
-    });
+    try {
+      const res = await axios.get("/api/me", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setUser(res.data);
+    } catch (err) {
+      localStorage.removeItem("token");
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    return () => unsubscribe();
+  useEffect(() => {
+    getMe();
   }, []);
 
   const authInfo = {
     user,
-    setUser,
+    loading,
     createUser,
     signIn,
-    googleSignIn,
     logOut,
-    loading,
+    setUser,
   };
 
-  return (
-    <AuthContext.Provider value={authInfo}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;
