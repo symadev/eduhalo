@@ -12,9 +12,9 @@ const AdminDashboard = () => {
   };
 
   const menuItems = [
-    { id: "teachers", label: "Manage Teachers", icon: <FaUserTie />, to: "/admin/teachers" },
-    { id: "parents", label: "Manage Parents", icon: <FaUsers />, to: "/admin/parents" },
-    { id: "students", label: "Manage Students", icon: <FaUserFriends />, to: "/admin/students" },
+    { id: "teachers", label: "Manage Teachers", icon: <FaUserTie />, to: "/dashboard/admin/teachers" },
+    { id: "parents", label: "Manage Parents", icon: <FaUsers />, to: "/dashboard/admin/parents" },
+    { id: "students", label: "Manage Students", icon: <FaUserFriends />, to: "/dashboard/admin/students" },
     { id: "school", label: "School Profile", icon: <FaSchool />, to: "/admin/school" },
     { id: "settings", label: "Settings", icon: <FaCog />, to: "/admin/settings" },
   ];

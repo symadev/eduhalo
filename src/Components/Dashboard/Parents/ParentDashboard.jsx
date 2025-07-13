@@ -1,23 +1,22 @@
 // ParentDashboard.jsx
-import { useState } from "react";
+import { useLocation, Outlet, Link } from "react-router-dom";
 import { FaClipboardList, FaCalendarAlt, FaBell, FaCog, FaSignOutAlt, FaFileAlt, FaChild } from "react-icons/fa";
-import { Outlet, Link } from "react-router-dom";
 
 const ParentDashboard = () => {
-  const [active, setActive] = useState("mychild");
+  const location = useLocation();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    window.location.reload(); // Or use context to reset user
+    window.location.reload(); // You can also redirect or reset context state
   };
 
   const menuItems = [
-    { id: "mychild", label: "My Child", icon: <FaChild />, to: "/dashboard/mychild" },
-    { id: "homework", label: "Homework", icon: <FaClipboardList />, to: "/dashboard/homework" },
-    { id: "attendance", label: "Attendance Calendar", icon: <FaCalendarAlt />, to: "/dashboard/attendance" },
-    { id: "report", label: "Report Card", icon: <FaFileAlt />, to: "/dashboard/report" },
-    { id: "notifications", label: "Notifications", icon: <FaBell />, to: "/dashboard/notifications" },
-    { id: "settings", label: "Settings", icon: <FaCog />, to: "/dashboard/settings" },
+    { id: "mychild", label: "My Child", icon: <FaChild />, to: "/dashboard/parent/child" },
+    { id: "homework", label: "Homework", icon: <FaClipboardList />, to: "/dashboard/parent/homework" },
+    { id: "attendance", label: "Attendance Calendar", icon: <FaCalendarAlt />, to: "/dashboard/parent/attendance" },
+    { id: "report", label: "Report Card", icon: <FaFileAlt />, to: "/dashboard/parent/report" },
+    { id: "notifications", label: "Notifications", icon: <FaBell />, to: "/dashboard/parent/notifications" },
+    { id: "settings", label: "Settings", icon: <FaCog />, to: "/dashboard/parent/settings" },
   ];
 
   return (
@@ -30,9 +29,8 @@ const ParentDashboard = () => {
             <Link
               key={item.id}
               to={item.to}
-              onClick={() => setActive(item.id)}
               className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-200 ${
-                active === item.id
+                location.pathname === item.to
                   ? "bg-white text-pink-600 font-semibold shadow-md"
                   : "hover:bg-white/60"
               }`}
@@ -41,7 +39,7 @@ const ParentDashboard = () => {
               <span>{item.label}</span>
             </Link>
           ))}
-          {/* Logout Button */}
+
           <button
             onClick={handleLogout}
             className="flex items-center gap-3 px-4 py-2 text-red-600 rounded-lg hover:bg-red-100 mt-6 w-full"
@@ -52,7 +50,7 @@ const ParentDashboard = () => {
         </nav>
       </div>
 
-      {/* Main Content Area */}
+      {/* Main Content */}
       <div className="flex-1 p-6 overflow-y-auto">
         <Outlet />
       </div>
