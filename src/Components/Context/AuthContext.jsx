@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import axios from "axios";
+
 import UseAxiosPublic from "./UseAxiosPublic";
 
 export const AuthContext = createContext(null);
@@ -35,7 +35,7 @@ const signIn = async (email, password, role) => {
     }
 
     try {
-      const res = await axios.get("/me", {
+      const res = await axiosPublic.get("/me", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUser(res.data);
