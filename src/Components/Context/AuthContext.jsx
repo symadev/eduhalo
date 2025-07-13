@@ -14,12 +14,14 @@ const AuthProvider = ({ children }) => {
   return res.data;
 };
 
-const signIn = async (email, password, role) => {
-  const res = await axiosPublic.post("/login", { email, password, role });
-  localStorage.setItem("token", res.data.token);
-  setUser(res.data.user);
-  return res.data;
+const signIn = async (email, password) => {
+  const res = await axiosPublic.post("/login", { email, password });
+  const { token, user } = res.data;
+  localStorage.setItem("token", token);
+  setUser(user); // This sets role, name, etc. for Navbar
+  return user;
 };
+
 
   const logOut = () => {
     setUser(null);
