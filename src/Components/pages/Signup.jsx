@@ -6,31 +6,34 @@ import { AuthContext } from "../Context/AuthContext";
 
 import { toast } from "react-toastify";
 import logo from "../../assets/images/hat.png"
+import { useNavigate } from "react-router-dom";
+
 
 Modal.setAppElement("#root");
 
 const SignUp = ({ isOpen, onRequestClose, openLogin }) => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
+const navigate = useNavigate();
 
 
- // SignUp.jsx
-const { createUser } = useContext(AuthContext);
+  // SignUp.jsx
+  const { createUser } = useContext(AuthContext);
 
-const onSubmit = async (data) => {
-  try {
-    const res = await createUser(data.name, data.email, data.password, data.role);
-    if (res.success) {
-      toast.success("SignUp Done!");
-      reset();
-      onRequestClose();
-      navigate("/");
-    } else {
-      toast.error("Signup failed: " + res.message);
+  const onSubmit = async (data) => {
+    try {
+      const res = await createUser(data.name, data.email, data.password, data.role);
+      if (res.success) {
+        toast.success("SignUp Done!");
+        reset();
+        onRequestClose();
+        navigate("/");
+      } else {
+        toast.error("Signup failed: " + res.message);
+      }
+    } catch (err) {
+      toast.error("Signup error: " + err.message);
     }
-  } catch (err) {
-    toast.error("Signup error: " + err.message);
-  }
-};
+  };
 
 
 
@@ -52,9 +55,9 @@ const onSubmit = async (data) => {
       {/* Header */}
       <div className="text-center mb-6">
         <div className="inline-block p-2 rounded-full bg-gradient-to-br from-purple-100 via-pink-100 to-orange-100 mb-3 shadow-md">
-         <img className="w-8 h-8" src={logo} alt="" />
-           
-         
+          <img className="w-8 h-8" src={logo} alt="" />
+
+
         </div>
         <h2 className="text-2xl font-bold text-[#111430] mb-1">
           Join EduHalo
@@ -104,13 +107,27 @@ const onSubmit = async (data) => {
           />
           {errors.password && <p className="text-pink-600 text-sm mt-1">{errors.password.message}</p>}
         </div>
+        <div>
+          <label className="block text-sm text-gray-700 mb-1 font-medium">Role</label>
+          <select
+            {...register("role", { required: "Role is required" })}
+            className="w-full px-3 py-2 bg-white/80 border border-pink-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition-all duration-200 text-gray-800 appearance-none cursor-pointer"
+          >
+            <option value="" className="bg-white text-gray-800">Select your role</option>
+            <option value="parent" className="bg-white text-gray-800">👨‍👩‍👧‍👦 Parent</option>
+            <option value="teacher" className="bg-white text-gray-800">👩‍🏫 Teacher</option>
+            <option value="admin" className="bg-white text-gray-800">⚡ Admin</option>
+          </select>
+          {errors.role && <p className="text-pink-600 text-sm mt-1">{errors.role.message}</p>}
+        </div>
+
 
         {/* Submit Button */}
         <button
           type="submit"
           className="w-full py-2.5 bg-gradient-to-r from-pink-500 to-orange-500 text-white font-semibold rounded-lg hover:from-pink-600 hover:to-orange-600 transform hover:scale-105 transition-all duration-200 shadow-md"
         >
-           SignUp
+          SignUp
         </button>
       </form>
 
