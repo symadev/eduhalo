@@ -20,10 +20,10 @@ const handleLogin = async (e) => {
   e.preventDefault();
   const email = e.target.email.value;
   const password = e.target.password.value;
-  const role = e.target.role.value;
+
 
   try {
-    const res = await signIn(email, password, role);
+    const res = await signIn(email, password);
     toast.success("Login Successful");
     onRequestClose();
     navigate("/");
@@ -86,19 +86,7 @@ const handleLogin = async (e) => {
           />
         </div>
 
-        <div>
-          <label className="block text-sm text-gray-700 mb-1 font-medium">Role</label>
-          <select 
-            name="role"
-            required
-            className="w-full px-3 py-2 bg-white/80 border border-pink-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition-all duration-200 text-gray-800 appearance-none cursor-pointer"
-          >
-            <option value="" className="bg-white text-gray-800">Select your role</option>
-            <option value="parent" className="bg-white text-gray-800">👨‍👩‍👧‍👦 Parent</option>
-            <option value="teacher" className="bg-white text-gray-800">👩‍🏫 Teacher</option>
-            <option value="admin" className="bg-white text-gray-800">⚡ Admin</option>
-          </select>
-        </div>
+        
 
         <button
           type="submit"
