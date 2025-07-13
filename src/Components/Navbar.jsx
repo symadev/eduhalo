@@ -1,19 +1,27 @@
 import { Link } from "react-router-dom";
 import image from "../assets/images/hat.png";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Login from "./pages/Login";
 import SignUp from "./pages/Signup";
+import { AuthContext } from "./Context/AuthContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-
-
-  // Modal visibility states
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
 
-  // Functions to open/close modals
+  const { user } = useContext(AuthContext);
+  const role = user?.role;
+
+  const dashboardRoute =
+    role === "parent"
+      ? "/dashboard/parent"
+      : role === "teacher"
+      ? "/dashboard/teacher"
+      : role === "admin"
+      ? "/dashboard/admin"
+      : "/";
+
   const openLogin = () => {
     setShowRegisterModal(false);
     setShowLoginModal(true);
@@ -26,6 +34,11 @@ const Navbar = () => {
 
   const closeLogin = () => setShowLoginModal(false);
   const closeRegister = () => setShowRegisterModal(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
 
   return (
     <div className="bg-gradient-to-r from-[#FFF8F5] via-[#FFF0EA] to-[#FFF8F5] shadow-lg backdrop-blur-md fixed top-0 left-0 w-full z-50 border-b border-pink-100">
@@ -47,38 +60,40 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex gap-2 items-center">
-          <a
-            href="#home"
-            className="relative px-4 py-2 text-gray-700 font-medium transition-all duration-300 hover:text-pink-600 group"
-          >
-            <span className="relative z-10">Home</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-pink-100 to-orange-100 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <a href="#home" className="px-4 py-2 text-gray-700 font-medium hover:text-pink-600 transition">
+            Home
           </a>
-
-          <a
-            href="#features"
-            className="relative px-4 py-2 text-gray-700 font-medium transition-all duration-300 hover:text-pink-600 group"
-          >
-            <span className="relative z-10">Features</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-pink-100 to-orange-100 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <a href="#features" className="px-4 py-2 text-gray-700 font-medium hover:text-pink-600 transition">
+            Features
           </a>
-
-          <a
-            href="#contact"
-            className="relative px-4 py-2 px-4 py-2 text-gray-700 font-medium transition-all duration-300 hover:text-pink-600 group "
-            onClick={() => setIsMenuOpen(false)} // for mobile
-          >
+          <a href="#contact" className="px-4 py-2 text-gray-700 font-medium hover:text-pink-600 transition">
             Contact
           </a>
 
-          <button
-            onClick={openLogin}
-            className="ml-4 px-6 py-2 bg-gradient-to-r from-pink-500 to-orange-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 hover:from-pink-600 hover:to-orange-600"
-          >
-            Login/SignUp
-          </button>
+          {user ? (
+            <>
+              <Link
+                to={dashboardRoute}
+                className="px-4 py-2 text-gray-700 font-medium hover:text-pink-600 transition"
+              >
+                Dashboard ({role})
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="ml-2 px-4 py-2 bg-red-400 text-white rounded-full hover:bg-red-500 transition"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <button
+              onClick={openLogin}
+              className="ml-4 px-6 py-2 bg-gradient-to-r from-pink-500 to-orange-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 hover:from-pink-600 hover:to-orange-600"
+            >
+              Login/SignUp
+            </button>
+          )}
         </div>
-
 
         {/* Mobile Menu Button */}
         <button
@@ -91,58 +106,57 @@ const Navbar = () => {
         </button>
       </div>
 
-
-
-
-
-      {/* Login Modal */}
-      <Login
-        isOpen={showLoginModal}
-        onRequestClose={closeLogin}
-        openRegister={openRegister} // So Login modal can open Register modal
-      />
-
-      {/* Register Modal */}
-      <SignUp
-        isOpen={showRegisterModal}
-        onRequestClose={closeRegister}
-        openLogin={openLogin} // So Register modal can open Login modal
-      />
-
       {/* Mobile Menu */}
       <div className={`md:hidden bg-white border-t border-pink-100 transition-all duration-300 ${isMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
         <div className="px-4 py-4 space-y-2">
-          <a
-            href="#home"
-            className="block px-4 py-3 text-gray-700 font-medium rounded-lg hover:bg-gradient-to-r hover:from-pink-50 hover:to-orange-50 hover:text-pink-600 transition-all duration-200"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            HOME
-          </a>
-          <a
-            href="#features"
-            className="block px-4 py-3 text-gray-700 font-medium rounded-lg hover:bg-gradient-to-r hover:from-pink-50 hover:to-orange-50 hover:text-pink-600 transition-all duration-200"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Features
-          </a>
-          <a
-            href="#contact"
-            className="..."
-            onClick={() => setIsMenuOpen(false)} // for mobile
-          >
-            Contact
-          </a>
-          <Link
-            to="/login"
-            className="block mx-4 mt-4 px-6 py-3 bg-gradient-to-r from-pink-500 to-orange-500 text-white font-semibold rounded-full text-center shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Login/SignUp
-          </Link>
+          <a href="#home" onClick={() => setIsMenuOpen(false)} className="block text-gray-700 hover:text-pink-600">Home</a>
+          <a href="#features" onClick={() => setIsMenuOpen(false)} className="block text-gray-700 hover:text-pink-600">Features</a>
+          <a href="#contact" onClick={() => setIsMenuOpen(false)} className="block text-gray-700 hover:text-pink-600">Contact</a>
+
+          {user ? (
+            <>
+              <Link
+                to={dashboardRoute}
+                onClick={() => setIsMenuOpen(false)}
+                className="block px-4 py-2 text-gray-700 hover:text-pink-600"
+              >
+                Dashboard ({role})
+              </Link>
+              <button
+                onClick={() => {
+                  handleLogout();
+                  setIsMenuOpen(false);
+                }}
+                className="block w-full px-4 py-2 text-left text-red-500 hover:bg-red-50"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <button
+              onClick={() => {
+                openLogin();
+                setIsMenuOpen(false);
+              }}
+              className="block mx-4 mt-4 px-6 py-3 bg-gradient-to-r from-pink-500 to-orange-500 text-white font-semibold rounded-full text-center shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+            >
+              Login/SignUp
+            </button>
+          )}
         </div>
       </div>
 
+      {/* Modals */}
+      <Login
+        isOpen={showLoginModal}
+        onRequestClose={closeLogin}
+        openRegister={openRegister}
+      />
+      <SignUp
+        isOpen={showRegisterModal}
+        onRequestClose={closeRegister}
+        openLogin={openLogin}
+      />
     </div>
   );
 };
