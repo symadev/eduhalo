@@ -1,14 +1,10 @@
-
-import {  useEffect, useState } from "react";
-
-
-import UseAxiosSecure from "../../Context/UseAxiosSecure";
-
+import { useEffect, useState } from "react";
+import UseAxiosSecure from "../../Context/UseAxiosSecure"
 const ManageStudents = () => {
   const [students, setStudents] = useState([]);
   const [teachers, setTeachers] = useState([]);
   const [parents, setParents] = useState([]);
-    const axiosSecure = UseAxiosSecure ();
+  const axiosSecure = UseAxiosSecure();
 
   const [form, setForm] = useState({
     name: "",
@@ -19,10 +15,8 @@ const ManageStudents = () => {
     assignedParent: "",
   });
 
-  
-
-  // Fetch teachers and parents
-useEffect(() => {
+  // ✅ Fetch all data
+  useEffect(() => {
     const fetchTeachers = async () => {
       try {
         const res = await axiosSecure.get("/users?role=teacher");
@@ -46,7 +40,7 @@ useEffect(() => {
   }, [axiosSecure]);
   
 
-  //  Add new student
+  // ✅ Add new student
   const handleAddStudent = (e) => {
     e.preventDefault();
 
@@ -82,13 +76,7 @@ useEffect(() => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#FFF8F5] via-[#FFF0EA] to-[#FFEBE5] py-8">
-      {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-20 h-20 bg-pink-200 rounded-full opacity-20"></div>
-        <div className="absolute top-40 right-20 w-16 h-16 bg-orange-200 rounded-full opacity-30"></div>
-        <div className="absolute bottom-20 left-20 w-24 h-24 bg-purple-200 rounded-full opacity-20"></div>
-        <div className="absolute bottom-40 right-10 w-12 h-12 bg-pink-300 rounded-full opacity-25"></div>
-      </div>
+    
 
       <div className="relative z-10 container mx-auto px-6 max-w-6xl">
         {/* Header */}
@@ -161,7 +149,7 @@ useEffect(() => {
                   value={form.assignedTeacher}
                   onChange={(e) => setForm({ ...form, assignedTeacher: e.target.value })}
                   required
-                  className="w-full px-4 py-3 bg-gradient-to-r from-pink-50 to-orange-50 border border-pink-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-transparent transition-all duration-300"
+                  className="w-full px-4 py-3 bg-orange-50 border border-pink-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-transparent transition-all duration-300"
                 >
                   <option value="">Select Teacher</option>
                   {teachers.map((teacher) => (
@@ -178,7 +166,7 @@ useEffect(() => {
                   value={form.assignedParent}
                   onChange={(e) => setForm({ ...form, assignedParent: e.target.value })}
                   required
-                  className="w-full px-4 py-3 bg-gradient-to-r from-pink-50 to-orange-50 border border-pink-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-transparent transition-all duration-300"
+                  className="w-full px-4 py-3 bg-orange-50 border border-pink-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-transparent transition-all duration-300"
                 >
                   <option value="">Select Parent</option>
                   {parents.map((p) => (
