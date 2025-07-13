@@ -1,9 +1,14 @@
-import { useEffect, useState } from "react";
+
+import {  useEffect, useState } from "react";
+
+
+import UseAxiosSecure from "../../Context/UseAxiosSecure";
 
 const ManageStudents = () => {
   const [students, setStudents] = useState([]);
   const [teachers, setTeachers] = useState([]);
   const [parents, setParents] = useState([]);
+    const axiosSecure = UseAxiosSecure ();
 
   const [form, setForm] = useState({
     name: "",
@@ -14,34 +19,34 @@ const ManageStudents = () => {
     assignedParent: "",
   });
 
-  // ✅ Fetch all data
-  useEffect(() => {
-    const fetchData = async () => {
+  
+
+  // Fetch teachers and parents
+useEffect(() => {
+    const fetchTeachers = async () => {
       try {
-        // Simulated data for demonstration
-        setTeachers([
-          { _id: "1", name: "John Smith" },
-          { _id: "2", name: "Sarah Johnson" },
-          { _id: "3", name: "Michael Brown" }
-        ]);
-        setParents([
-          { _id: "1", name: "David Wilson" },
-          { _id: "2", name: "Emma Davis" },
-          { _id: "3", name: "James Miller" }
-        ]);
-        setStudents([
-          { _id: "1", name: "Alice Johnson", class: "5", roll: "101", section: "A" },
-          { _id: "2", name: "Bob Smith", class: "6", roll: "102", section: "B" }
-        ]);
+        const res = await axiosSecure.get("/users?role=teacher");
+        setTeachers(res.data.data || []);
       } catch (error) {
-        console.error("Failed to fetch initial data:", error);
+        console.error("Failed to fetch teachers:", error);
       }
     };
 
-    fetchData();
-  }, []);
+    const fetchParents = async () => {
+      try {
+        const res = await axiosSecure.get("/users?role=parent");
+        setParents(res.data.data || []);
+      } catch (error) {
+        console.error("Failed to fetch parents:", error);
+      }
+    };
 
-  // ✅ Add new student
+    fetchTeachers();
+    fetchParents();
+  }, [axiosSecure]);
+  
+
+  //  Add new student
   const handleAddStudent = (e) => {
     e.preventDefault();
 
