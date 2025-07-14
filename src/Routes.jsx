@@ -12,6 +12,7 @@ import ManageTeachers from "./Components/Dashboard/Admin/ManageTeachers";
 import ManageParents from "./Components/Dashboard/Admin/ManageParents";
 import ManageStudents from "./Components/Dashboard/Admin/ManageStudents";
 import MyClass from "./Components/Dashboard/Teacher/MyClass";
+import Homework from "./Components/Dashboard/Teacher/Homework";
 
 
 
@@ -26,59 +27,64 @@ const router = createBrowserRouter([
         element: <Home></Home>,
 
       },
-        {
+      {
         path: "/dashboard/parent",
-        element:<ParentDashboard></ParentDashboard>,
-          children: [
-            {
-        path: "child",
-        element: <Child></Child>,
+        element: <ParentDashboard></ParentDashboard>,
+        children: [
+          {
+            path: "child",
+            element: <Child></Child>,
+
+          },
+
+        ],
 
       },
-
-          ],
-
-      },
-        {
+      {
         path: "/dashboard/teacher",
-        element:<TeacherDashboard></TeacherDashboard>,
+        element: <TeacherDashboard></TeacherDashboard>,
         children: [
-            {
-        path: "myclass",
-        element: <MyClass></MyClass>,
+          {
+            path: "myclass",
+            element: <MyClass></MyClass>,
+
+          },
+          {
+            path: "homework",
+            element: <Homework></Homework>,
+
+          },
+
+        ],
 
       },
-
-          ],
-
-      },
-        {
+      {
         path: "/dashboard/admin",
-        element:<AdminDashboard></AdminDashboard>,
+        element: <AdminDashboard></AdminDashboard>,
         children: [
-            {
-        path: "teachers",
-        element:<ManageTeachers></ManageTeachers>,
+          {
+            path: "teachers",
+            element: <ManageTeachers></ManageTeachers>,
+
+          },
+          {
+            path: "parents",
+            element: <ManageParents></ManageParents>,
+
+          },
+          {
+            path: "students",
+            element: <ManageStudents></ManageStudents>,
+
+          },
+
+        ],
 
       },
-            {
-        path: "parents",
-        element:<ManageParents></ManageParents>,
 
-      },
-            {
-        path: "students",
-        element:<ManageStudents></ManageStudents>,
 
-      },
-
-          ],
-
-      },
-      
-      
     ],
-   
+
 
   },
 ]);
