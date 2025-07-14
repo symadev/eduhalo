@@ -12,7 +12,7 @@ const TeacherDashboard = () => {
   };
 
   const menuItems = [
-    { id: "myclass", label: "My Class", icon: <FaChalkboardTeacher />, to: "/teacher/myclass" },
+    { id: "myclass", label: "My Class", icon: <FaChalkboardTeacher />, to: "/dashboard/teacher/myclass" },
     { id: "homework", label: "Assign Homework", icon: <FaPen />, to: "/teacher/homework" },
     { id: "attendance", label: "Mark Attendance", icon: <FaChartBar />, to: "/teacher/attendance" },
     { id: "result", label: "Add Result", icon: <FaFileAlt />, to: "/teacher/result" },
