@@ -21,7 +21,7 @@ const ManageParents = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:5000/admin/parents", {
+      const res = await axios.get("http://localhost:4000/admin/parents", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setParents(res.data);
@@ -43,7 +43,7 @@ const ManageParents = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        "http://localhost:5000/admin/parents",
+        "http://localhost:4000/admin/parents",
         {
           name,
           email,
@@ -71,7 +71,7 @@ const ManageParents = () => {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/admin/parents/${id}`, {
+      await axios.delete(`http://localhost:4000/admin/parents/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

@@ -24,7 +24,7 @@ const ManageTeachers = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:5000/admin/teachers", {
+      const res = await axios.get("http://localhost:4000/admin/teachers", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setTeachers(res.data);
@@ -46,7 +46,7 @@ const ManageTeachers = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        "http://localhost:5000/admin/teachers",
+        "http://localhost:4000/admin/teachers",
         { name, email, subject, phone, password },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -71,7 +71,7 @@ const ManageTeachers = () => {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/admin/teachers/${id}`, {
+      await axios.delete(`http://localhost:4000/admin/teachers/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
