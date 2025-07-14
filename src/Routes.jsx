@@ -11,6 +11,7 @@ import Child from "./Components/Dashboard/Parents/Child";
 import ManageTeachers from "./Components/Dashboard/Admin/ManageTeachers";
 import ManageParents from "./Components/Dashboard/Admin/ManageParents";
 import ManageStudents from "./Components/Dashboard/Admin/ManageStudents";
+import MyClass from "./Components/Dashboard/Teacher/MyClass";
 
 
 
@@ -41,6 +42,14 @@ const router = createBrowserRouter([
         {
         path: "/dashboard/teacher",
         element:<TeacherDashboard></TeacherDashboard>,
+        children: [
+            {
+        path: "myclass",
+        element: <MyClass></MyClass>,
+
+      },
+
+          ],
 
       },
         {
