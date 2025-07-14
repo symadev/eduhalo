@@ -1,6 +1,14 @@
 // AdminDashboard.jsx
 import { useState } from "react";
-import { FaUsers, FaUserTie, FaUserFriends, FaSchool, FaCog, FaSignOutAlt } from "react-icons/fa";
+import {
+  FaUsers,
+  FaUserTie,
+  FaUserFriends,
+  FaSchool,
+  FaCog,
+  FaSignOutAlt,
+  FaHome,
+} from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
 
 const AdminDashboard = () => {
@@ -12,11 +20,36 @@ const AdminDashboard = () => {
   };
 
   const menuItems = [
-    { id: "teachers", label: "Manage Teachers", icon: <FaUserTie />, to: "/dashboard/admin/teachers" },
-    { id: "parents", label: "Manage Parents", icon: <FaUsers />, to: "/dashboard/admin/parents" },
-    { id: "students", label: "Manage Students", icon: <FaUserFriends />, to: "/dashboard/admin/students" },
-    { id: "school", label: "School Profile", icon: <FaSchool />, to: "/admin/school" },
-    { id: "settings", label: "Settings", icon: <FaCog />, to: "/admin/settings" },
+    {
+      id: "teachers",
+      label: "Manage Teachers",
+      icon: <FaUserTie />,
+      to: "/dashboard/admin/teachers",
+    },
+    {
+      id: "parents",
+      label: "Manage Parents",
+      icon: <FaUsers />,
+      to: "/dashboard/admin/parents",
+    },
+    {
+      id: "students",
+      label: "Manage Students",
+      icon: <FaUserFriends />,
+      to: "/dashboard/admin/students",
+    },
+    {
+      id: "school",
+      label: "School Profile",
+      icon: <FaSchool />,
+      to: "/admin/school",
+    },
+    {
+      id: "settings",
+      label: "Settings",
+      icon: <FaCog />,
+      to: "/admin/settings",
+    },
   ];
 
   return (
@@ -41,6 +74,19 @@ const AdminDashboard = () => {
             </Link>
           ))}
 
+          {/* Divider */}
+          <div className="h-1 bg-pink-400 my-4 rounded"></div>
+
+          {/* Home Link */}
+          <Link
+            to="/"
+            className="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-700 hover:bg-white/60 transition-all"
+          >
+            <FaHome />
+            <span>Home</span>
+          </Link>
+
+          {/* Logout Button */}
           <button
             onClick={handleLogout}
             className="flex items-center gap-3 px-4 py-2 text-red-600 rounded-lg hover:bg-red-100 mt-6 w-full"
