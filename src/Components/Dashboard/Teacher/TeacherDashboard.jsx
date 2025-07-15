@@ -14,7 +14,7 @@ const TeacherDashboard = () => {
   const menuItems = [
     { id: "myclass", label: "My Class", icon: <FaChalkboardTeacher />, to: "/dashboard/teacher/myclass" },
     { id: "homework", label: "Assign Homework", icon: <FaPen />, to: "/dashboard/teacher/homework" },
-    { id: "attendance", label: "Mark Attendance", icon: <FaChartBar />, to: "/teacher/attendance" },
+    { id: "attendance", label: "Mark Attendance", icon: <FaChartBar />, to: "/dashboard/teacher/attendance" },
     { id: "result", label: "Add Result", icon: <FaFileAlt />, to: "/teacher/result" },
     { id: "settings", label: "Settings", icon: <FaCog />, to: "/teacher/settings" },
   ];
