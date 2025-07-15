@@ -1,0 +1,100 @@
+.react-calendar {
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  width: 100%;
+}
+
+.react-calendar__navigation {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.react-calendar__navigation button {
+  background: white;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #6b7280;
+  padding: 8px 12px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+}
+
+.react-calendar__navigation button:hover {
+  background: #f3f4f6;
+  transform: translateY(-1px);
+}
+
+.react-calendar__navigation__label {
+  font-size: 20px;
+  font-weight: 700;
+  color: #4338ca;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.react-calendar__month-view__weekdays {
+  text-align: center;
+  font-weight: 600;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  padding: 12px 0;
+  text-decoration: none;
+}
+
+.react-calendar__month-view__days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.react-calendar__tile {
+  position: relative;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.react-calendar__tile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.react-calendar__tile--active {
+  background: linear-gradient(135deg, #ec4899, #8b5cf6) !important;
+  color: white !important;
+  border-color: #ec4899;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3);
+}
+
+.react-calendar__tile--active span {
+  color: white !important;
+}
+
+.react-calendar__tile--now {
+  background: #fef3c7;
+  border-color: #f59e0b;
+  color: #92400e;
+}
+
+.react-calendar__tile--neighboringMonth {
+  color: #d1d5db;
+}

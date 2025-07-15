@@ -7,7 +7,7 @@ import Home from "./Components/Home";
 import ParentDashboard from "./Components/Dashboard/Parents/ParentDashboard";
 import TeacherDashboard from "./Components/Dashboard/Teacher/TeacherDashboard";
 import AdminDashboard from "./Components/Dashboard/Admin/AdminDashboard";
-import Child from "./Components/Dashboard/Parents/Child";
+
 import ManageTeachers from "./Components/Dashboard/Admin/ManageTeachers";
 import ManageParents from "./Components/Dashboard/Admin/ManageParents";
 import ManageStudents from "./Components/Dashboard/Admin/ManageStudents";
@@ -15,6 +15,10 @@ import MyClass from "./Components/Dashboard/Teacher/MyClass";
 import Homework from "./Components/Dashboard/Teacher/Homework";
 import AttendancePage from "./Components/Dashboard/Teacher/AttendancePage";
 import AddResultPage from "./Components/Dashboard/Teacher/AddResultPage";
+import MyChild from "./Components/Dashboard/Parents/MyChild";
+import AttendanceCalendar from "./Components/Dashboard/Parents/AttendanceCalendar";
+import ReportCard from "./Components/Dashboard/Parents/ReportCard";
+import HomeworkParent from "./Components/Dashboard/Parents/HomeworkParent";
 
 
 
@@ -35,8 +39,23 @@ const router = createBrowserRouter([
         element: <ParentDashboard></ParentDashboard>,
         children: [
           {
-            path: "child",
-            element: <Child></Child>,
+            path: "mychild",
+            element:<MyChild></MyChild> ,
+
+          },
+          {
+            path: "homework",
+            element:<HomeworkParent></HomeworkParent> ,
+
+          },
+          {
+            path: "attendance",
+            element:<AttendanceCalendar></AttendanceCalendar> ,
+
+          },
+          {
+            path: "report",
+            element:<ReportCard></ReportCard> ,
 
           },
 
