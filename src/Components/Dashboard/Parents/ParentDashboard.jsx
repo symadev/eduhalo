@@ -1,17 +1,41 @@
-// ParentDashboard.jsx
 import { useLocation, Outlet, Link } from "react-router-dom";
 import { FaClipboardList, FaCalendarAlt, FaBell, FaCog, FaSignOutAlt, FaFileAlt, FaChild } from "react-icons/fa";
+import { useQuery, gql } from "@apollo/client";
+import { useContext } from "react";
+import { AuthContext } from "../../Context/AuthContext"; // adjust if needed
+import { createContext } from "react";
+
+// GraphQL Query to get child by parent ID
+const GET_MY_CHILD = gql`
+  query MyChild($parentId: ID!) {
+    myChild(parentId: $parentId) {
+      _id
+      name
+    }
+  }
+`;
+
+// ✅ Create a context to share childId across nested components
+export const ChildContext = createContext(null);
 
 const ParentDashboard = () => {
   const location = useLocation();
+  const { user } = useContext(AuthContext);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    window.location.reload(); // You can also redirect or reset context state
+    window.location.reload();
   };
 
+  const { data, loading, error } = useQuery(GET_MY_CHILD, {
+    variables: { parentId: user?._id },
+    skip: !user,
+  });
+
+  const child = data?.myChild;
+
   const menuItems = [
-    { id: "mychild", label: "My Child", icon: <FaChild />, to: "/dashboard/parent/child" },
+    { id: "mychild", label: "My Child", icon: <FaChild />, to: "/dashboard/parent/mychild" },
     { id: "homework", label: "Homework", icon: <FaClipboardList />, to: "/dashboard/parent/homework" },
     { id: "attendance", label: "Attendance Calendar", icon: <FaCalendarAlt />, to: "/dashboard/parent/attendance" },
     { id: "report", label: "Report Card", icon: <FaFileAlt />, to: "/dashboard/parent/report" },
@@ -19,42 +43,47 @@ const ParentDashboard = () => {
     { id: "settings", label: "Settings", icon: <FaCog />, to: "/dashboard/parent/settings" },
   ];
 
+  if (loading) return <p className="p-6">Loading child data...</p>;
+  if (error || !child) return <p className="p-6 text-red-600">❌ No child data found for this parent.</p>;
+
   return (
-    <div className="flex min-h-screen bg-[#FFF8F5] text-gray-800">
-      {/* Sidebar */}
-      <div className="w-64 bg-gradient-to-b from-pink-100 to-orange-100 p-6 shadow-xl">
-        <h2 className="text-2xl font-bold text-pink-600 mb-6">🎓 Parent Panel</h2>
-        <nav className="space-y-2">
-          {menuItems.map((item) => (
-            <Link
-              key={item.id}
-              to={item.to}
-              className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-200 ${
-                location.pathname === item.to
-                  ? "bg-white text-pink-600 font-semibold shadow-md"
-                  : "hover:bg-white/60"
-              }`}
+    <ChildContext.Provider value={{ childId: child._id }}>
+      <div className="flex min-h-screen bg-[#FFF8F5] text-gray-800">
+        {/* Sidebar */}
+        <div className="w-64 bg-gradient-to-b from-pink-100 to-orange-100 p-6 shadow-xl">
+          <h2 className="text-2xl font-bold text-pink-600 mb-6">🎓 Parent Panel</h2>
+          <nav className="space-y-2">
+            {menuItems.map((item) => (
+              <Link
+                key={item.id}
+                to={item.to}
+                className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-200 ${
+                  location.pathname === item.to
+                    ? "bg-white text-pink-600 font-semibold shadow-md"
+                    : "hover:bg-white/60"
+                }`}
+              >
+                <span className="text-lg">{item.icon}</span>
+                <span>{item.label}</span>
+              </Link>
+            ))}
+
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-3 px-4 py-2 text-red-600 rounded-lg hover:bg-red-100 mt-6 w-full"
             >
-              <span className="text-lg">{item.icon}</span>
-              <span>{item.label}</span>
-            </Link>
-          ))}
+              <FaSignOutAlt className="text-lg" />
+              Logout
+            </button>
+          </nav>
+        </div>
 
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-3 px-4 py-2 text-red-600 rounded-lg hover:bg-red-100 mt-6 w-full"
-          >
-            <FaSignOutAlt className="text-lg" />
-            Logout
-          </button>
-        </nav>
+        {/* Main Content */}
+        <div className="flex-1 p-6 overflow-y-auto">
+          <Outlet />
+        </div>
       </div>
-
-      {/* Main Content */}
-      <div className="flex-1 p-6 overflow-y-auto">
-        <Outlet />
-      </div>
-    </div>
+    </ChildContext.Provider>
   );
 };
 

@@ -1,6 +1,13 @@
-// TeacherDashboard.jsx
 import { useState } from "react";
-import { FaChalkboardTeacher, FaPen, FaChartBar, FaFileAlt, FaCog, FaSignOutAlt } from "react-icons/fa";
+import {
+  FaChalkboardTeacher,
+  FaPen,
+  FaChartBar,
+  FaFileAlt,
+  FaCog,
+  FaSignOutAlt,
+  FaHome,
+} from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
 
 const TeacherDashboard = () => {
@@ -12,11 +19,36 @@ const TeacherDashboard = () => {
   };
 
   const menuItems = [
-    { id: "myclass", label: "My Class", icon: <FaChalkboardTeacher />, to: "/dashboard/teacher/myclass" },
-    { id: "homework", label: "Assign Homework", icon: <FaPen />, to: "/dashboard/teacher/homework" },
-    { id: "attendance", label: "Mark Attendance", icon: <FaChartBar />, to: "/dashboard/teacher/attendance" },
-    { id: "result", label: "Add Result", icon: <FaFileAlt />, to: "/dashboard/teacher/result" },
-    { id: "settings", label: "Settings", icon: <FaCog />, to: "/teacher/settings" },
+    {
+      id: "myclass",
+      label: "My Class",
+      icon: <FaChalkboardTeacher />,
+      to: "/dashboard/teacher/myclass",
+    },
+    {
+      id: "homework",
+      label: "Assign Homework",
+      icon: <FaPen />,
+      to: "/dashboard/teacher/homework",
+    },
+    {
+      id: "attendance",
+      label: "Mark Attendance",
+      icon: <FaChartBar />,
+      to: "/dashboard/teacher/attendance",
+    },
+    {
+      id: "result",
+      label: "Add Result",
+      icon: <FaFileAlt />,
+      to: "/dashboard/teacher/result",
+    },
+    {
+      id: "settings",
+      label: "Settings",
+      icon: <FaCog />,
+      to: "/teacher/settings",
+    },
   ];
 
   return (
@@ -41,6 +73,19 @@ const TeacherDashboard = () => {
             </Link>
           ))}
 
+          {/* Divider */}
+          <div className="h-1 bg-purple-300 my-4 rounded"></div>
+
+          {/* Home Link */}
+          <Link
+            to="/"
+            className="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-700 hover:bg-white/60 transition-all"
+          >
+            <FaHome />
+            <span>Home</span>
+          </Link>
+
+          {/* Logout Button */}
           <button
             onClick={handleLogout}
             className="flex items-center gap-3 px-4 py-2 text-red-600 rounded-lg hover:bg-red-100 mt-6 w-full"
