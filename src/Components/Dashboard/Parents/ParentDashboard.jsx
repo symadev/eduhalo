@@ -1,5 +1,5 @@
 import { useLocation, Outlet, Link } from "react-router-dom";
-import { FaClipboardList, FaCalendarAlt, FaBell, FaCog, FaSignOutAlt, FaFileAlt, FaChild } from "react-icons/fa";
+import { FaClipboardList, FaCalendarAlt, FaBell, FaCog, FaSignOutAlt, FaFileAlt, FaChild, FaHome } from "react-icons/fa";
 import { useQuery, gql } from "@apollo/client";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthContext"; // adjust if needed
@@ -57,16 +57,27 @@ const ParentDashboard = () => {
               <Link
                 key={item.id}
                 to={item.to}
-                className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-200 ${
-                  location.pathname === item.to
+                className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-200 ${location.pathname === item.to
                     ? "bg-white text-pink-600 font-semibold shadow-md"
                     : "hover:bg-white/60"
-                }`}
+                  }`}
               >
                 <span className="text-lg">{item.icon}</span>
                 <span>{item.label}</span>
               </Link>
             ))}
+
+            {/* Divider */}
+            <div className="h-1 bg-pink-400 my-4 rounded"></div>
+
+            {/* Home Link */}
+            <Link
+              to="/"
+              className="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-700 hover:bg-white/60 transition-all"
+            >
+              <FaHome />
+              <span>Home</span>
+            </Link>
 
             <button
               onClick={handleLogout}
