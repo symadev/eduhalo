@@ -39,6 +39,11 @@ const router = createBrowserRouter([
         element: <ParentDashboard></ParentDashboard>,
         children: [
           {
+            index: true,
+            element:<MyChild></MyChild> ,
+
+          },
+          {
             path: "mychild",
             element:<MyChild></MyChild> ,
 
@@ -67,6 +72,11 @@ const router = createBrowserRouter([
         element: <TeacherDashboard></TeacherDashboard>,
         children: [
           {
+            index: true,
+            element: <MyClass></MyClass>,
+
+          },
+          {
             path: "myclass",
             element: <MyClass></MyClass>,
 
@@ -94,6 +104,11 @@ const router = createBrowserRouter([
         path: "/dashboard/admin",
         element: <AdminDashboard></AdminDashboard>,
         children: [
+          {
+            index: true,
+            element: <ManageTeachers></ManageTeachers>,
+
+          },
           {
             path: "teachers",
             element: <ManageTeachers></ManageTeachers>,
