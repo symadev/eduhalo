@@ -14,6 +14,8 @@ import ManageStudents from "./Components/Dashboard/Admin/ManageStudents";
 import MyClass from "./Components/Dashboard/Teacher/MyClass";
 import Homework from "./Components/Dashboard/Teacher/Homework";
 import AttendancePage from "./Components/Dashboard/Teacher/AttendancePage";
+import AddResultPage from "./Components/Dashboard/Teacher/AddResultPage";
+
 
 
 
@@ -58,6 +60,11 @@ const router = createBrowserRouter([
           {
             path: "attendance",
             element: <AttendancePage></AttendancePage>,
+
+          },
+          {
+            path: "result",
+            element: <AddResultPage></AddResultPage>,
 
           },
 
