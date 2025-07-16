@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import FeatureDetails from "../Components/FeatureDetails";
-import MarqueeBanner from "./MarqueeBanner";
+
 
 const Feature = () => {
   const [cards, setCards] = useState([]);
@@ -112,7 +112,7 @@ const Feature = () => {
       </div>
 
 
-        <MarqueeBanner></MarqueeBanner>
+       
     </div>
   );
 };
