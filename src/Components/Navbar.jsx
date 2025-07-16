@@ -66,6 +66,9 @@ const Navbar = () => {
           <a href="#features" className="px-4 py-2 text-gray-700 font-medium hover:text-pink-600 transition">
             Features
           </a>
+          <a href="#testimonials" className="px-4 py-2 text-gray-700 font-medium hover:text-pink-600 transition">
+           Testimonials
+          </a>
           <a href="#contact" className="px-4 py-2 text-gray-700 font-medium hover:text-pink-600 transition">
             Contact
           </a>
@@ -111,6 +114,7 @@ const Navbar = () => {
         <div className="px-4 py-4 space-y-2">
           <a href="#home" onClick={() => setIsMenuOpen(false)} className="block text-gray-700 hover:text-pink-600">Home</a>
           <a href="#features" onClick={() => setIsMenuOpen(false)} className="block text-gray-700 hover:text-pink-600">Features</a>
+          <a href="#testimonials" onClick={() => setIsMenuOpen(false)} className="block text-gray-700 hover:text-pink-600">Testimonials</a>
           <a href="#contact" onClick={() => setIsMenuOpen(false)} className="block text-gray-700 hover:text-pink-600">Contact</a>
 
           {user ? (

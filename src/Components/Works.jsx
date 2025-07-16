@@ -32,7 +32,7 @@ const Works = () => {
   }, []);
 
   return (
-    <div id="works-section" className="relative bg-[#FFEBE5] py-16 overflow-hidden">
+    <div id="works-section" className="relative bg-[#FFEBE5] py-12 overflow-hidden">
       {/* Enhanced Background Decorative Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-16 left-8 w-72 h-72 bg-gradient-to-br from-orange-300 to-pink-300 rounded-full opacity-40 blur-3xl animate-pulse"></div>
