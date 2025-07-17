@@ -37,7 +37,7 @@ const NotificationBell = () => {
       <div className="relative cursor-pointer" onClick={toggleDropdown}>
         <Bell className="w-6 h-6 text-orange-500" />
         {unreadCount > 0 && (
-          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1">
+          <span className="absolute -top-1 -right-1 bg-red-500 text-gray-700 text-xs rounded-full px-1">
             {unreadCount}
           </span>
         )}
@@ -47,12 +47,12 @@ const NotificationBell = () => {
         <div className="absolute right-0 mt-2 w-64 bg-white border rounded shadow-lg z-10">
           <ul className="p-2 max-h-60 overflow-y-auto">
             {notifications.length === 0 ? (
-              <li className="text-sm text-gray-500">No notifications</li>
+              <li className="text-sm text-gray-700">No notifications</li>
             ) : (
               notifications.map((n) => (
                 <li key={n._id} className="py-1 text-sm border-b last:border-0">
                   {n.message}
-                  <div className="text-xs text-gray-400">
+                  <div className="text-xs text-gray-800">
                     {new Date(n.createdAt).toLocaleString()}
                   </div>
                 </li>
