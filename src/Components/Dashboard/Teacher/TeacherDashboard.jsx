@@ -47,7 +47,7 @@ const TeacherDashboard = () => {
       id: "settings",
       label: "Settings",
       icon: <FaCog />,
-      to: "/teacher/settings",
+      to: "/dashboard/teacher/settings",
     },
   ];
 

@@ -179,7 +179,7 @@ const AdminSetting= () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#FFF8F5] via-[#FFF0EA] to-[#FFEBE5] py-8">
-      
+       
 
       <div className="max-w-2xl mx-auto px-4 relative z-10">
         {/* Header */}
