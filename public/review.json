@@ -10,7 +10,7 @@
     {
         "id": "4",
         "name": "Md. Tanvir Ahmed",
-        "image": "./../src/assets/images/2.png",
+        "image": "./../src/assets/images/teacher-1.png",
         "message": "As a teacher, EduHalo makes it incredibly easy to manage student attendance, assign homework, and upload results — all in one streamlined dashboard. It saves me so much time!",
         "role": "Teacher",
         "rating": 5
