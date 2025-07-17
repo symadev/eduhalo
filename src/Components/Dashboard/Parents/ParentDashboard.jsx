@@ -68,7 +68,7 @@ const ParentDashboard = () => {
             ))}
 
             {/* Divider */}
-            <div className="h-1 bg-pink-400 my-4 rounded"></div>
+            <div className="h-1 bg-pink-400  w-2/4 my-4 rounded"></div>
 
             {/* Home Link */}
             <Link
@@ -81,7 +81,7 @@ const ParentDashboard = () => {
 
             <button
               onClick={handleLogout}
-              className="flex items-center gap-3 px-4 py-2 text-red-600 rounded-lg hover:bg-red-100 mt-6 w-full"
+              className="flex items-center gap-3 px-4 py-2 text-gray-700 rounded-lg hover:bg-white mt-6 w-full"
             >
               <FaSignOutAlt className="text-lg" />
               Logout
