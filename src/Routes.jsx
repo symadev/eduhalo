@@ -19,6 +19,7 @@ import MyChild from "./Components/Dashboard/Parents/MyChild";
 import AttendanceCalendar from "./Components/Dashboard/Parents/AttendanceCalendar";
 import ReportCard from "./Components/Dashboard/Parents/ReportCard";
 import HomeworkParent from "./Components/Dashboard/Parents/HomeworkParent";
+import AdminSetting from "./Components/Dashboard/Admin/AdminSetting";
 
 
 
@@ -122,6 +123,11 @@ const router = createBrowserRouter([
           {
             path: "students",
             element: <ManageStudents></ManageStudents>,
+
+          },
+          {
+            path: "setting",
+            element: <AdminSetting></AdminSetting>,
 
           },
 

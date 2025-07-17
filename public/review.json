@@ -1,7 +1,7 @@
 [
     {
         "id": "1",
-        "name": "Amina Rahman",
+        "name": "Zara Rahman",
         "image": "./../src/assets/images/1.png",
         "message": "EduHalo transformed my son's learning journey. The classes are interactive, and the teacher feedback is always timely. Highly recommended for modern learning!",
         "role": "Parent",
@@ -9,7 +9,7 @@
     },
     {
         "id": "4",
-        "name": "Md. Tanvir Hasan",
+        "name": "Md. Tanvir Ahmed",
         "image": "./../src/assets/images/2.png",
         "message": "As a teacher, EduHalo makes it incredibly easy to manage student attendance, assign homework, and upload results — all in one streamlined dashboard. It saves me so much time!",
         "role": "Teacher",
@@ -17,7 +17,7 @@
     },
     {
         "id": "3",
-        "name": "Rumana Akter",
+        "name": "Mina Jabin",
         "image": "./../src/assets/images/3.png",
         "message": "EduHalo made managing students, assigning homework, and monitoring attendance effortless. It has become an essential part of my teaching routine.",
         "role": "Teacher",
