@@ -39,7 +39,7 @@ const ParentDashboard = () => {
     { id: "homework", label: "Homework", icon: <FaClipboardList />, to: "/dashboard/parent/homework" },
     { id: "attendance", label: "Attendance Calendar", icon: <FaCalendarAlt />, to: "/dashboard/parent/attendance" },
     { id: "report", label: "Report Card", icon: <FaFileAlt />, to: "/dashboard/parent/report" },
-    { id: "notifications", label: "Notifications", icon: <FaBell />, to: "/dashboard/parent/notifications" },
+   
     { id: "settings", label: "Settings", icon: <FaCog />, to: "/dashboard/parent/settings" },
   ];
 

@@ -4,6 +4,7 @@ import { useState, useContext } from "react";
 import Login from "./pages/Login";
 import SignUp from "./pages/Signup";
 import { AuthContext } from "./Context/AuthContext";
+import NotificationBell from "./NotificationBell";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,10 +18,10 @@ const Navbar = () => {
     role === "parent"
       ? "/dashboard/parent"
       : role === "teacher"
-      ? "/dashboard/teacher"
-      : role === "admin"
-      ? "/dashboard/admin"
-      : "/";
+        ? "/dashboard/teacher"
+        : role === "admin"
+          ? "/dashboard/admin"
+          : "/";
 
   const openLogin = () => {
     setShowRegisterModal(false);
@@ -67,7 +68,7 @@ const Navbar = () => {
             Features
           </a>
           <a href="#testimonials" className="px-4 py-2 text-gray-700 font-medium hover:text-pink-600 transition">
-           Testimonials
+            Testimonials
           </a>
           <a href="#contact" className="px-4 py-2 text-gray-700 font-medium hover:text-pink-600 transition">
             Contact
@@ -75,6 +76,8 @@ const Navbar = () => {
 
           {user ? (
             <>
+              {user && user.role === "parent" && <NotificationBell />}
+
               <Link
                 to={dashboardRoute}
                 className="px-4 py-2 text-gray-700 font-medium hover:text-pink-600 transition"
@@ -119,6 +122,8 @@ const Navbar = () => {
 
           {user ? (
             <>
+              {user && user.role === "parent" && <NotificationBell />}
+
               <Link
                 to={dashboardRoute}
                 onClick={() => setIsMenuOpen(false)}
