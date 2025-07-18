@@ -1,6 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import { AuthContext } from "../../Context/AuthContext";
 import { useContext, useState, useEffect } from "react";
+import kid from "../../../assets/images/kid.png"
 
 const GET_MY_CHILD = gql`
   query MyChild($parentId: ID!) {
@@ -38,7 +39,7 @@ const MyChild = () => {
             <div className="absolute inset-0 w-16 h-16 border-4 border-transparent border-t-orange-400 rounded-full animate-spin mx-auto" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
           </div>
           <p className="text-lg font-semibold bg-gradient-to-r from-[#111430] via-purple-800 to-pink-600 bg-clip-text text-transparent">
-            Loading child info...
+            Loading...
           </p>
         </div>
       </div>
@@ -84,10 +85,10 @@ const MyChild = () => {
               {/* Profile Header */}
               <div className="text-center mb-8">
                 <div className="relative inline-block">
-                  <div className="w-24 h-24 bg-gradient-to-br from-pink-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-                    <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
+                  <div className="w-16 h-16 bg-gradient-to-br from-pink-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <img src={kid} className="w-12 h-12 text-white" alt="kid">
+                     
+                    </img>
                   </div>
                   <div className="absolute -top-2 -right-2 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
                     <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
