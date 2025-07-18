@@ -4,6 +4,8 @@ import { useRef, useContext } from "react";
 import { ChildContext } from "./ParentDashboard";
 import { Trash2 } from "lucide-react";
 import { toast } from "react-toastify";
+import html2pdf from "html2pdf.js";
+
 
 const GET_RESULT = gql`
   query ResultByChild($childId: ID!) {
@@ -37,12 +39,23 @@ const ReportCard = () => {
 
 
   const printRef = useRef();
-  const handlePrint = useReactToPrint({ content: () => printRef.current });
   const [deleteResult] = useMutation(DELETE_RESULT);
 
+    const handleDownloadPDF = () => {
+  const element = printRef.current;
 
+  const opt = {
+    margin:       0.5,
+    filename:     'report-card.pdf',
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2 },
+    jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+  };
 
-  const handleDeleteResult = async (resultId) => {
+  html2pdf().set(opt).from(element).save();
+};
+
+const handleDeleteResult = async (resultId) => {
       try {
         await deleteResult({ variables: { resultId } });
         toast.success("Result deleted");
@@ -54,6 +67,10 @@ const ReportCard = () => {
 
   if (loading) return <p className="text-center text-gray-500 py-4">Loading results...</p>;
   if (error) return <p className="text-center text-red-500 py-4">Failed to load results</p>;
+
+
+
+
 
   const getGradeColor = (grade) => {
     switch (grade?.toUpperCase()) {
@@ -114,7 +131,7 @@ const ReportCard = () => {
 
       <div className="text-center mt-6">
         <button
-          onClick={handlePrint}
+          onClick={handleDownloadPDF}
           className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
         >
           📄 Download Report Card
