@@ -1,12 +1,15 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery ,useMutation, } from "@apollo/client";
 import { useReactToPrint } from "react-to-print";
 import { useRef, useContext } from "react";
 import { ChildContext } from "./ParentDashboard";
+import { Trash2 } from "lucide-react";
+import { toast } from "react-toastify";
 
 const GET_RESULT = gql`
   query ResultByChild($childId: ID!) {
     resultByChild(childId: $childId) {
       subject
+       _id
       marks
       grade
       remarks
@@ -14,15 +17,40 @@ const GET_RESULT = gql`
   }
 `;
 
+
+const DELETE_RESULT= gql`
+  mutation DeleteResult($resultId: ID!) {
+    deleteResult(resultId: $resultId) {
+      success
+      message
+    }
+  }
+`;
+
+
 const ReportCard = () => {
   const { childId } = useContext(ChildContext);
-  const { data, loading, error } = useQuery(GET_RESULT, {
-    variables: { childId },
-    skip: !childId,
-  });
+  const { data, loading, error, refetch } = useQuery(GET_RESULT, {
+  variables: { childId },
+  skip: !childId,
+});
+
 
   const printRef = useRef();
   const handlePrint = useReactToPrint({ content: () => printRef.current });
+  const [deleteResult] = useMutation(DELETE_RESULT);
+
+
+
+  const handleDeleteResult = async (resultId) => {
+      try {
+        await deleteResult({ variables: { resultId } });
+        toast.success("Result deleted");
+        await refetch();
+      } catch (err) {
+        toast.error("Failed to delete result");
+      }
+    };
 
   if (loading) return <p className="text-center text-gray-500 py-4">Loading results...</p>;
   if (error) return <p className="text-center text-red-500 py-4">Failed to load results</p>;
@@ -56,6 +84,13 @@ const ReportCard = () => {
                       {result.grade}
                     </span>
                   </div>
+                   <button
+                    onClick={() => handleDeleteResult (result._id)}
+                    className="text-red-400 hover:text-red-600 hover:bg-red-50 p-2 rounded-lg transition-all duration-200"
+                    title="Delete Result"
+                  >
+                    <Trash2  className=" text-purple-500"size={20} />
+                  </button>
                 </div>
                 
                 <div className="w-full bg-gray-200 rounded-full h-2 mb-3">

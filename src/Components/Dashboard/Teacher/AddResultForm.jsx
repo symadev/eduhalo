@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { gql, useMutation } from "@apollo/client";
 import { AuthContext } from "../../Context/AuthContext";
+import { toast } from "react-toastify";
 
 const ADD_RESULT = gql`
   mutation AddResult($input: AddResultInput!) {
@@ -43,15 +44,16 @@ const AddResultForm = ({ studentId }) => {
             });
 
             if (data.addResult.success) {
-                alert("Result added successfully!");
-            }
+        toast.success("Result added successfully!");
+    } else {
+        toast.error("Failed to add result");
+    }
 
-
-            setFormData({ subject: "", marks: "", grade: "", remarks: "" });
-        } catch (error) {
-            console.error("Error:", error.message);
-            alert(" Failed to add result");
-        }
+    setFormData({ subject: "", marks: "", grade: "", remarks: "" });
+} catch (error) {
+    console.error("Error:", error.message);
+    toast.error("Failed to add result");
+}
     };
 
     return (
