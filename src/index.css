@@ -5,3 +5,12 @@
 html {
   scroll-behavior: smooth;
 }
+
+
+/* App.css or index.css */
+@media print {
+  button,
+  .no-print {
+    display: none !important;
+  }
+}
