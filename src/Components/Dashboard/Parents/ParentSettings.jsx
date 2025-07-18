@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
-import { MessageSquare, Send, CheckCircle,  AlertTriangle, Star } from 'lucide-react';
-import logo from "../../../assets/images/parent-logo.png"
+import { gql, useMutation } from '@apollo/client';
+import { MessageSquare, Send, CheckCircle, AlertTriangle, Star } from 'lucide-react';
+import logo from "../../../assets/images/parent-logo.png";
+
+const CREATE_FEEDBACK_OR_COMPLAINT = gql`
+  mutation CreateFeedbackOrComplaint($input: FeedbackInput!) {
+    createFeedbackOrComplaint(input: $input) {
+      success
+      message
+    }
+  }
+`;
 
 const ParentSettings = () => {
   const [feedbackType, setFeedbackType] = useState('feedback');
@@ -9,6 +19,9 @@ const ParentSettings = () => {
   const [rating, setRating] = useState(0);
   const [showSuccess, setShowSuccess] = useState(false);
   const [errors, setErrors] = useState({});
+
+  // Use mutation hook
+  const [createFeedbackOrComplaint, { loading, error }] = useMutation(CREATE_FEEDBACK_OR_COMPLAINT);
 
   const validateForm = () => {
     const newErrors = {};
@@ -31,23 +44,37 @@ const ParentSettings = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = () => {
-    if (validateForm()) {
-      console.log({
-        type: feedbackType,
-        subject,
-        message,
-        rating: feedbackType === 'feedback' ? rating : null,
+  const handleSubmit = async () => {
+    if (!validateForm()) return;
+
+    try {
+      const { data } = await createFeedbackOrComplaint({
+        variables: {
+          input: {
+            type: feedbackType,
+            subject,
+            message,
+            rating: feedbackType === 'feedback' ? rating : null,
+          },
+        },
       });
 
-      setSubject('');
-      setMessage('');
-      setRating(0);
-      setShowSuccess(true);
-
-      setTimeout(() => {
-        setShowSuccess(false);
-      }, 3000);
+      if (data.createFeedbackOrComplaint.success) {
+        setSubject('');
+        setMessage('');
+        setRating(0);
+        setShowSuccess(true);
+        setErrors({});
+        setTimeout(() => {
+          setShowSuccess(false);
+        }, 3000);
+      } else {
+        // handle failure, show error message if you want
+        alert(data.createFeedbackOrComplaint.message || 'Failed to submit');
+      }
+    } catch (err) {
+      console.error('Submission error:', err);
+      alert('An error occurred while submitting your request.');
     }
   };
 
@@ -60,6 +87,7 @@ const ParentSettings = () => {
           className={`p-1 rounded transition-colors ${
             star <= rating ? 'text-yellow-400' : 'text-gray-300'
           } hover:text-yellow-400`}
+          type="button"
         >
           <Star className="h-6 w-6 fill-current" />
         </button>
@@ -73,7 +101,7 @@ const ParentSettings = () => {
         {/* Header */}
         <div className="flex items-center space-x-3 mb-6  p-10 justify-center">
           <div className=" rounded-full shadow-lg">
-           <img  className="w-16 h-16"src={logo } alt="" />
+            <img className="w-16 h-16" src={logo} alt="" />
           </div>
           <div>
             <h1 className="text-4xl font-bold bg-gradient-to-r from-[#111430] via-purple-800 to-pink-600 bg-clip-text text-transparent">
@@ -96,6 +124,7 @@ const ParentSettings = () => {
                     ? 'bg-gradient-to-r from-pink-500 to-orange-500 text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
+                type="button"
               >
                 <MessageSquare className="h-5 w-5" />
                 <span>Give Feedback</span>
@@ -107,6 +136,7 @@ const ParentSettings = () => {
                     ? 'bg-gradient-to-r from-pink-500 to-orange-500 text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
+                type="button"
               >
                 <AlertTriangle className="h-5 w-5" />
                 <span>File Complaint</span>
@@ -169,7 +199,8 @@ const ParentSettings = () => {
           {/* Submit */}
           <button
             onClick={handleSubmit}
-            className="w-full bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
+            disabled={loading}
+            className="w-full bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Send className="h-5 w-5" />
             <span>
@@ -186,6 +217,13 @@ const ParentSettings = () => {
                   ? 'Thank you for your feedback! We appreciate your input.'
                   : 'Your complaint has been submitted. We will review it and get back to you soon.'}
               </span>
+            </div>
+          )}
+
+          {/* Error message */}
+          {error && (
+            <div className="mt-4 p-4 bg-red-100 border border-red-300 text-red-700 rounded-lg">
+              Error submitting your request. Please try again.
             </div>
           )}
         </div>
