@@ -4,7 +4,7 @@ import {
   FaUsers,
   FaUserTie,
   FaUserFriends,
-  FaSchool,
+ 
   FaCog,
   FaSignOutAlt,
   FaHome,

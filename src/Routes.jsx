@@ -20,7 +20,7 @@ import AttendanceCalendar from "./Components/Dashboard/Parents/AttendanceCalenda
 import ReportCard from "./Components/Dashboard/Parents/ReportCard";
 import HomeworkParent from "./Components/Dashboard/Parents/HomeworkParent";
 import AdminSetting from "./Components/Dashboard/Admin/AdminSetting";
-import TeacherSettings from "./Components/Dashboard/Teacher/TeacherSettings";
+
 import ParentSettings from "./Components/Dashboard/Parents/ParentSettings";
 
 
@@ -104,11 +104,7 @@ const router = createBrowserRouter([
             element: <AddResultPage></AddResultPage>,
 
           },
-          {
-            path: "settings",
-            element:<TeacherSettings></TeacherSettings>,
-
-          },
+       
 
         ],
 

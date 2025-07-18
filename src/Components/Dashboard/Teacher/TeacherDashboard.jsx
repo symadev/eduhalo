@@ -4,7 +4,7 @@ import {
   FaPen,
   FaChartBar,
   FaFileAlt,
-  FaCog,
+ 
   FaSignOutAlt,
   FaHome,
 } from "react-icons/fa";
@@ -43,12 +43,7 @@ const TeacherDashboard = () => {
       icon: <FaFileAlt />,
       to: "/dashboard/teacher/result",
     },
-    {
-      id: "settings",
-      label: "Settings",
-      icon: <FaCog />,
-      to: "/dashboard/teacher/settings",
-    },
+   
   ];
 
   return (
