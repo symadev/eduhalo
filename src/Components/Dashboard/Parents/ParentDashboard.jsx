@@ -43,8 +43,12 @@ const ParentDashboard = () => {
     { id: "settings", label: "Settings", icon: <FaCog />, to: "/dashboard/parent/settings" },
   ];
 
-  if (loading) return <p className="p-6">Loading child data...</p>;
-  if (error || !child) return <p className="p-6 text-red-600">❌ No child data found for this parent.</p>;
+  if (loading) return (
+    <div className="bg-gradient-to-br from-[#FFF8F5] via-[#FFF0EA] to-[#FFEBE5] p-8 rounded-2xl">
+      <p className="text-pink-600 font-semibold">Loading Child Data</p>
+    </div>
+  );
+ if (error || !child) return <div className="text-red-500 text-center">No child data found</div>;
 
   return (
     <ChildContext.Provider value={{ childId: child._id }}>
