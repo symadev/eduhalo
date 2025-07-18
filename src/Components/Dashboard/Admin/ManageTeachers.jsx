@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+
 import { toast } from "react-toastify";
+import UseAxiosSecure from "../../Context/UseAxiosSecure";
 
 const ManageTeachers = () => {
   const [teachers, setTeachers] = useState([]);
@@ -14,6 +15,9 @@ const ManageTeachers = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
 
+  // Get axios instance with interceptor (token included)
+  const axiosSecure = UseAxiosSecure();
+
   useEffect(() => {
     setIsVisible(true);
     fetchTeachers();
@@ -23,10 +27,7 @@ const ManageTeachers = () => {
   const fetchTeachers = async () => {
     setLoading(true);
     try {
-      const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:4000/admin/teachers", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await axiosSecure.get("/admin/teachers");
       setTeachers(res.data);
     } catch (error) {
       toast.error("Failed to fetch teachers");
@@ -44,12 +45,13 @@ const ManageTeachers = () => {
     }
 
     try {
-      const token = localStorage.getItem("token");
-      await axios.post(
-        "http://localhost:4000/admin/teachers",
-        { name, email, subject, phone, password },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      await axiosSecure.post("/admin/teachers", {
+        name,
+        email,
+        subject,
+        phone,
+        password,
+      });
 
       toast.success("Teacher added successfully");
       // Reset form
@@ -70,10 +72,7 @@ const ManageTeachers = () => {
     if (!window.confirm("Are you sure to delete this teacher?")) return;
 
     try {
-      const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:4000/admin/teachers/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axiosSecure.delete(`/admin/teachers/${id}`);
 
       toast.success("Teacher deleted successfully");
       fetchTeachers();

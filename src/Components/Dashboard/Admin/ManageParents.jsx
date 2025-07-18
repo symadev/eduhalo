@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import UseAxiosSecure from "../../Context/UseAxiosSecure";
 
 const ManageParents = () => {
+  const axiosSecure = UseAxiosSecure();
+
   const [parents, setParents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -20,10 +23,7 @@ const ManageParents = () => {
   const fetchParents = async () => {
     setLoading(true);
     try {
-      const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:4000/admin/parents", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await axiosSecure.get("/admin/parents");
       setParents(res.data);
     } catch (err) {
       toast.error("Failed to fetch parents");
@@ -41,19 +41,12 @@ const ManageParents = () => {
     }
 
     try {
-      const token = localStorage.getItem("token");
-      await axios.post(
-        "http://localhost:4000/admin/parents",
-        {
-          name,
-          email,
-          phone,
-          password: "123456", // set password by default
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      await axiosSecure.post("/admin/parents", {
+        name,
+        email,
+        phone,
+        password: "123456", // set password by default
+      });
 
       toast.success("Parent added successfully!");
       setName("");
@@ -70,10 +63,7 @@ const ManageParents = () => {
     if (!window.confirm("Are you sure you want to delete this parent?")) return;
 
     try {
-      const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:4000/admin/parents/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axiosSecure.delete(`/admin/parents/${id}`);
 
       toast.success("Parent deleted");
       fetchParents();
