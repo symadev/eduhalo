@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { gql, useQuery, useMutation } from "@apollo/client";
+import { toast } from "react-toastify";
 
 const GET_STUDENTS = gql`
   query {
@@ -42,6 +43,16 @@ const GET_PARENTS = gql`
   }
 `;
 
+const DELETE_STUDENT= gql`
+  mutation DeleteStudent($studentId: ID!) {
+    deleteStudent(studentId: $studentId) {
+      success
+      message
+    }
+  }
+`;
+
+
 
 
 const ManageStudents = () => {
@@ -58,6 +69,7 @@ const ManageStudents = () => {
   const { data: teacherData } = useQuery(GET_TEACHERS);
   const { data: parentData } = useQuery(GET_PARENTS);
   const [addStudent] = useMutation(ADD_STUDENT);
+  const [ deleteStudent] = useMutation(DELETE_STUDENT);
 
   const handleAddStudent = async (e) => {
     e.preventDefault();
@@ -81,10 +93,15 @@ const ManageStudents = () => {
     }
   };
 
-  const handleDelete = (id) => {
-    // You can implement deleteStudent mutation similarly
-    alert("Delete mutation not implemented yet");
-  };
+  const handleDeleteStudent = async (studentId) => {
+      try {
+        await deleteStudent({ variables: { studentId } });
+        toast.success("Student deleted");
+        await refetch();
+      } catch (err) {
+        toast.error("Failed to delete Student");
+      }
+    };
 
   const students = studentData?.students || [];
   const teachers = teacherData?.teachers || [];
@@ -139,7 +156,7 @@ const ManageStudents = () => {
                     <p className="text-gray-500">Teacher: {s.assignedTeacher?.name || "N/A"}</p>
                     <p className="text-gray-500">Parent: {s.assignedParent?.name || "N/A"}</p>
                   </div>
-                  <button onClick={() => handleDelete(s._id)} className="bg-red-500 text-white px-4 py-2 rounded-full">Delete</button>
+                  <button onClick={() => handleDeleteStudent(s._id)} className="bg-red-500 text-white px-4 py-2 rounded-full">Delete</button>
                 </div>
               </div>
             ))
