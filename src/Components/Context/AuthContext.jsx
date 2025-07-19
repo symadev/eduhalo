@@ -11,8 +11,17 @@ const AuthProvider = ({ children }) => {
 
   const createUser = async (name, email, password, role = "parent") => {
   const res = await axiosPublic.post("/signup", { name, email, password, role });
+  const { token, user } = res.data;
+
+  localStorage.setItem("token", token);
+  setUser(user);
+
   return res.data;
 };
+
+
+// here i can set the token in login and  the signup   also 
+// here need to set the token in the signup for set the login automatically after the registration
 
 const signIn = async (email, password) => {
   const res = await axiosPublic.post("/login", { email, password });

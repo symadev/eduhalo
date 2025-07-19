@@ -26,7 +26,7 @@ const Banner = () => {
               🎓 Educational Excellence
             </span>
           </div>
-          
+
           <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
             <span className="bg-gradient-to-r from-[#111430] via-purple-800 to-pink-600 bg-clip-text text-transparent">
               Stay Connected
@@ -38,34 +38,36 @@ const Banner = () => {
               Children's Education
             </span>
           </h1>
-          
+
           <p className="text-gray-600 text-lg mb-8 leading-relaxed max-w-lg">
-            Stay connected with your school — view results, class updates, and teacher content all in one place with 
+            Stay connected with your school — view results, class updates, and teacher content all in one place with
             <span className="font-semibold text-pink-600"> EduHalo</span>.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            <button className="group relative px-8 py-4 bg-gradient-to-r from-pink-500 to-orange-500 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 overflow-hidden">
+            <button
+              onClick={() => {
+                const section = document.getElementById("works");
+                if (section) {
+                  section.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
+              className="group relative px-8 py-4 bg-gradient-to-r from-pink-500 to-orange-500 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 overflow-hidden"
+            >
               <span className="relative z-10 flex items-center gap-2">
-                Get Started
+                See How To Works
                 <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-pink-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
-            
-            <button className="group px-8 py-4 bg-white text-pink-600 border-2 border-pink-200 rounded-full font-semibold shadow-md hover:shadow-lg hover:bg-pink-50 hover:border-pink-300 transform hover:scale-105 transition-all duration-300">
-              <span className="flex items-center gap-2">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h8m-9 4h10a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                View Features
-              </span>
-            </button>
+
+
+
           </div>
-          
-          
+
+
         </div>
 
         {/* Right image */}
@@ -74,7 +76,7 @@ const Banner = () => {
             {/* Floating Elements */}
             <div className="absolute -top-6 -left-6 w-20 h-20 bg-gradient-to-br from-pink-400 to-orange-400 rounded-2xl opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
             <div className="absolute -bottom-6 -right-6 w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-400 rounded-2xl opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
-            
+
             {/* Main Image Container */}
             <div className="relative p-4  group-hover:shadow-3xl transition-all duration-300 transform group-hover:scale-105">
               <img
@@ -82,10 +84,10 @@ const Banner = () => {
                 alt="Educational Platform"
                 className="w-full h-auto "
               />
-              
+
               {/* Overlay gradient */}
               <div className="absolute inset-4 bg-gradient-to-t from-black/10 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              
+
               {/* Floating notification cards */}
               <div className="absolute top-8 right-8 bg-white rounded-lg shadow-lg p-3 transform translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500">
                 <div className="flex items-center gap-2">
@@ -93,7 +95,7 @@ const Banner = () => {
                   <span className="text-xs text-gray-600">New Assignment</span>
                 </div>
               </div>
-              
+
               <div className="absolute bottom-8 left-8 bg-white rounded-lg shadow-lg p-3 transform -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500 delay-200">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
