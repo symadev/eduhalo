@@ -22,9 +22,9 @@ const ParentDashboard = () => {
   const location = useLocation();
   const { user } = useContext(AuthContext);
 
-  const handleLogout = () => {
+ const handleLogout = () => {
     localStorage.removeItem("token");
-    window.location.reload();
+    window.location.reload(); // Or navigate to login
   };
 
   const { data, loading, error } = useQuery(GET_MY_CHILD, {
@@ -43,12 +43,29 @@ const ParentDashboard = () => {
     { id: "settings", label: "Settings", icon: <FaCog />, to: "/dashboard/parent/settings" },
   ];
 
-  if (loading) return (
-    <div className="bg-gradient-to-br from-[#FFF8F5] via-[#FFF0EA] to-[#FFEBE5] p-8 rounded-2xl">
-      <p className="text-pink-600 font-semibold">Loading Child Data</p>
+  if (loading) {
+  return (
+    <div className="bg-gradient-to-br from-[#FFF8F5] via-[#FFF0EA] to-[#FFEBE5] p-6 rounded-2xl shadow-md text-center">
+      <p className="text-pink-600 font-semibold text-lg animate-pulse">
+        loading your child info...
+      </p>
     </div>
   );
- if (error || !child) return <div className="text-red-500 text-center">No child data found</div>;
+}
+
+if (error || !child) {
+  return (
+    <div className="bg-red-50 border border-red-200 text-center p-6 rounded-2xl shadow-sm">
+      <p className="text-red-600 font-semibold text-lg">
+        Sorry! Your child info is not found।
+      </p>
+      <p className="text-gray-600 text-sm mt-2">
+        try to log in again
+      </p>
+    </div>
+  );
+}
+
 
   return (
     <ChildContext.Provider value={{ childId: child._id }}>
@@ -83,13 +100,14 @@ const ParentDashboard = () => {
               <span>Home</span>
             </Link>
 
-            <button
-              onClick={handleLogout}
-              className="flex items-center gap-3 px-4 py-2 text-gray-700 rounded-lg hover:bg-white mt-6 w-full"
-            >
-              <FaSignOutAlt className="text-lg" />
-              Logout
-            </button>
+             {/* Logout Button */}
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-3 px-4 py-2 text-gray-700 rounded-lg hover:bg-white mt-6 w-full"
+          >
+            <FaSignOutAlt className="text-lg" />
+            Logout
+          </button>
           </nav>
         </div>
 
