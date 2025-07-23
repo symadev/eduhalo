@@ -1,22 +1,23 @@
-// AdminDashboard.jsx
 import { useState } from "react";
 import {
   FaUsers,
   FaUserTie,
   FaUserFriends,
- 
   FaCog,
   FaSignOutAlt,
   FaHome,
+  FaBars,
+  FaTimes,
 } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
 
 const AdminDashboard = () => {
   const [active, setActive] = useState("teachers");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    window.location.reload(); // Or navigate to login
+    window.location.reload();
   };
 
   const menuItems = [
@@ -38,7 +39,6 @@ const AdminDashboard = () => {
       icon: <FaUserFriends />,
       to: "/dashboard/admin/students",
     },
-    
     {
       id: "settings",
       label: "Settings",
@@ -48,16 +48,31 @@ const AdminDashboard = () => {
   ];
 
   return (
-    <div className="flex min-h-screen bg-[#FFF8F5] text-gray-800">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-[#FFF8F5] text-gray-800">
+      {/* Mobile Navbar */}
+      <div className="flex items-center justify-between p-4 bg-pink-100 shadow-md lg:hidden">
+        <h2 className="text-xl font-bold text-pink-600">⚡ Admin Panel</h2>
+        <button onClick={() => setSidebarOpen(!sidebarOpen)} className="text-2xl text-pink-600">
+          {sidebarOpen ? <FaTimes /> : <FaBars />}
+        </button>
+      </div>
+
       {/* Sidebar */}
-      <aside className="w-64 bg-gradient-to-b from-pink-100 to-orange-100 p-6 shadow-xl">
-        <h2 className="text-2xl font-bold text-pink-600 mb-6">⚡ Admin Panel</h2>
+      <aside
+        className={`${
+          sidebarOpen ? "block" : "hidden"
+        } lg:block w-full lg:w-64 bg-gradient-to-b from-pink-100 to-orange-100 p-6 shadow-xl transition-all duration-300 z-20`}
+      >
+        <h2 className="text-2xl font-bold text-pink-600 mb-6 hidden lg:block">⚡ Admin Panel</h2>
         <nav className="space-y-2">
           {menuItems.map((item) => (
             <Link
               key={item.id}
               to={item.to}
-              onClick={() => setActive(item.id)}
+              onClick={() => {
+                setActive(item.id);
+                setSidebarOpen(false); // Auto-close on mobile
+              }}
               className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-200 ${
                 active === item.id
                   ? "bg-white text-pink-600 font-semibold shadow-md"
@@ -75,6 +90,7 @@ const AdminDashboard = () => {
           {/* Home Link */}
           <Link
             to="/"
+            onClick={() => setSidebarOpen(false)}
             className="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-700 hover:bg-white/60 transition-all"
           >
             <FaHome />
@@ -83,7 +99,10 @@ const AdminDashboard = () => {
 
           {/* Logout Button */}
           <button
-            onClick={handleLogout}
+            onClick={() => {
+              handleLogout();
+              setSidebarOpen(false);
+            }}
             className="flex items-center gap-3 px-4 py-2 text-gray-700 rounded-lg hover:bg-white mt-6 w-full"
           >
             <FaSignOutAlt className="text-lg" />
@@ -93,7 +112,7 @@ const AdminDashboard = () => {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-6 overflow-y-auto">
+      <main className="flex-1 p-4 sm:p-6 overflow-y-auto">
         <Outlet />
       </main>
     </div>
