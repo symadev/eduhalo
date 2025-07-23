@@ -1,12 +1,16 @@
 [
   {
-    "icon": "/../src/assets/images/download.png",
-    "title": "Download the App",
-    "description": "Get EduHalo from the App Store or Google Play to begin your digital learning journey."
-  },
+ 
+  "icon": "/../src/assets/images/download.png",
+  "title": "Access from Any Device",
+  "description": "EduHalo works seamlessly in your browser. You can also install it for a native-like experience."
+},
+
+  
+
   {
     "icon": "/../src/assets/images/school.png",
-    "title": "Connect with Your School",
+    "title": "Connect with Your Teachers",
     "description": "Link your account using your student or parent ID to access school updates and information."
   },
   {
