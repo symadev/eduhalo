@@ -41,19 +41,7 @@ const ReportCard = () => {
   const printRef = useRef();
   const [deleteResult] = useMutation(DELETE_RESULT);
 
-    const handleDownloadPDF = () => {
-  const element = printRef.current;
-
-  const opt = {
-    margin:       0.5,
-    filename:     'report-card.pdf',
-    image:        { type: 'jpeg', quality: 0.98 },
-    html2canvas:  { scale: 2 },
-    jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-  };
-
-  html2pdf().set(opt).from(element).save();
-};
+   
 
 const handleDeleteResult = async (resultId) => {
       try {
@@ -129,14 +117,7 @@ const handleDeleteResult = async (resultId) => {
         )}
       </div>
 
-      <div className="text-center mt-6">
-        <button
-          onClick={handleDownloadPDF}
-          className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
-        >
-          📄 Download Report Card
-        </button>
-      </div>
+    
     </div>
   );
 };
