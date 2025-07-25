@@ -1,4 +1,4 @@
-import image from '../assets/images/banner.png';
+
 import { useState, useEffect } from 'react';
 
 const Banner = () => {
@@ -47,7 +47,7 @@ const Banner = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
             <button
               onClick={() => {
-                const section = document.getElementById("works");
+                const section = document.getElementById("works");//use here the dom , which is find the element by the id
                 if (section) {
                   section.scrollIntoView({ behavior: "smooth" });
                 }
@@ -80,7 +80,7 @@ const Banner = () => {
             {/* Main Image Container */}
             <div className="relative p-4  group-hover:shadow-3xl transition-all duration-300 transform group-hover:scale-105">
               <img
-                src={image}
+                src="/assets/banner.png"
                 alt="Educational Platform"
                 className="w-full h-auto "
               />

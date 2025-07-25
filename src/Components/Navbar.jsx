@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import image from "../assets/images/hat.png";
+
 import { useState, useContext } from "react";
 import Login from "./pages/Login";
 import SignUp from "./pages/Signup";
@@ -49,7 +49,7 @@ const Navbar = () => {
           <div className="relative">
             <img
               className="w-12 h-12 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12 drop-shadow-md"
-              src={image}
+              src="/assets/hat.png"
               alt="Logo"
             />
             <div className="absolute -inset-1 bg-gradient-to-r from-pink-400 to-orange-400 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>

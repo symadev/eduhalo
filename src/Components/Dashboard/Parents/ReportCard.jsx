@@ -4,7 +4,7 @@ import { useRef, useContext } from "react";
 import { ChildContext } from "./ParentDashboard";
 import { Trash2 } from "lucide-react";
 import { toast } from "react-toastify";
-import html2pdf from "html2pdf.js";
+
 
 
 const GET_RESULT = gql`

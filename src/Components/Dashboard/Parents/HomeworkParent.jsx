@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import { useContext, useState, useEffect } from "react";
-import { ChildContext } from "./ParentDashboard"; // adjust path based on your folder structure
+import { ChildContext } from "./ParentDashboard"; 
 
 const GET_HOMEWORK = gql`
   query HomeworkByChild($childId: ID!) {

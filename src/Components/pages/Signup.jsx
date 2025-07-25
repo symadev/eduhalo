@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 
 import { toast } from "react-toastify";
-import logo from "../../assets/images/hat.png"
+
 import { useNavigate } from "react-router-dom";
 
 
@@ -55,7 +55,7 @@ const navigate = useNavigate();
       {/* Header */}
       <div className="text-center mb-6">
         <div className="inline-block p-2 rounded-full bg-gradient-to-br from-purple-100 via-pink-100 to-orange-100 mb-3 shadow-md">
-          <img className="w-8 h-8" src={logo} alt="" />
+          <img className="w-8 h-8" src="/assets/hat.png " alt="" />
 
 
         </div>

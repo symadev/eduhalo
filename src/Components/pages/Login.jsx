@@ -2,10 +2,10 @@ import Modal from "react-modal";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../Context/AuthContext";
-import logo from "../../assets/images/hat.png";
+
 import { Link, useNavigate } from "react-router-dom";
 
-// Required for accessibility
+// here root is the main dom element of my app
 Modal.setAppElement("#root");
 
 const Login = ({ isOpen, onRequestClose, openRegister }) => {
@@ -18,7 +18,7 @@ const Login = ({ isOpen, onRequestClose, openRegister }) => {
     const password = e.target.password.value;
 
     try {
-      await signIn(email, password); // AuthContext handles setUser and token
+      await signIn(email, password); 
       toast.success("Login Successful");
       onRequestClose();
       navigate("/");
@@ -44,7 +44,7 @@ const Login = ({ isOpen, onRequestClose, openRegister }) => {
 
       <div className="text-center mb-6">
         <div className="inline-block p-2 rounded-full bg-gradient-to-br from-purple-100 via-pink-100 to-orange-100 mb-3 shadow-md">
-          <img className="w-8 h-8" src={logo} alt="logo" />
+          <img className="w-8 h-8" src="/assets/hat.png" alt="logo" />
         </div>
         <h2 className="text-2xl font-bold text-[#111430] mb-1">
           Welcome to EduHalo

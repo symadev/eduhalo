@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { MessageSquare, Send, CheckCircle, AlertTriangle, Star } from 'lucide-react';
-import logo from "../../../assets/images/parent-logo.png";
+
 
 const CREATE_FEEDBACK_OR_COMPLAINT = gql`
   mutation CreateFeedbackOrComplaint($input: FeedbackInput!) {
@@ -101,7 +101,7 @@ const ParentSettings = () => {
         {/* Header */}
         <div className="flex items-center space-x-3 mb-6  p-10 justify-center">
           <div className=" rounded-full shadow-lg">
-            <img className="w-16 h-16" src={logo} alt="" />
+            <img className="w-16 h-16" src="/assets/parent-logo.png" alt="" />
           </div>
           <div>
             <h1 className="text-4xl font-bold bg-gradient-to-r from-[#111430] via-purple-800 to-pink-600 bg-clip-text text-transparent">

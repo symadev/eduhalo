@@ -48,23 +48,3 @@ export default AuthModal;
 
 
 
-
-// AuthModal কম্পোনেন্টটি হলো একটি parent/controller কম্পোনেন্ট, যেটি নিচের কাজগুলো করে:
-
-// State Manage করে:
-
-// showLogin: Login modal খোলা আছে কিনা তা ঠিক করে।
-
-// showRegister: Register modal খোলা আছে কিনা তা ঠিক করে।
-
-// Control Functions দেয়:
-
-// openLogin(): Login modal খুলে এবং Register modal বন্ধ করে।
-
-// openRegister(): Register modal খুলে এবং Login modal বন্ধ করে।
-
-// Props পাঠায় Child Modal-এ:
-
-// Login কম্পোনেন্টে openRegister পাঠানো হয়, যাতে user চাইলে "Sign up" বাটনে ক্লিক করে Register modal খুলতে পারে।
-
-// SignUp কম্পোনেন্টে openLogin পাঠানো হয়, যাতে "Already have account?" ক্লিক করলে Login modal-এ ফিরে যাওয়া যায়।
