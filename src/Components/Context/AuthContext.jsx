@@ -61,7 +61,7 @@ const signIn = async (email, password) => {
 
 
 //   When a user logs in, you store their token in localStorage.
-// Now if they refresh the page, your app loses state (e.g., the user variable is reset).
+// Now if they refresh the page, your app loses state (the user variable is reset).
 // getMe() checks if a token exists and re-authenticates the user.
 
 

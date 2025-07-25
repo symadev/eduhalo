@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import logo from "../../../assets/images/2.png";
+
 import UseAxiosSecure from "../../Context/UseAxiosSecure";
 
 const AdminSettings = () => {
@@ -47,7 +47,7 @@ const AdminSettings = () => {
           <div className="flex items-center justify-center mb-8">
             <div className="relative">
               <div className="w-20 h-20 bg-gradient-to-br from-yellow-200 to-orange-400 rounded-full flex items-center justify-center shadow-lg">
-                <img src={logo} className="w-16 h-16"alt="" />
+                <img src="/assets/2.png" className="w-16 h-16"alt="" />
               </div>
               <div className="absolute -top-2 -right-2 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
                 <span className="text-white text-sm">✓</span>

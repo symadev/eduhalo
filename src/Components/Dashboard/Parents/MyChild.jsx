@@ -1,7 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import { AuthContext } from "../../Context/AuthContext";
 import { useContext, useState, useEffect } from "react";
-import kid from "../../../assets/images/kid.png"
+
 
 const GET_MY_CHILD = gql`
   query MyChild($parentId: ID!) {
@@ -86,7 +86,7 @@ const MyChild = () => {
               <div className="text-center mb-8">
                 <div className="relative inline-block">
                   <div className="w-16 h-16 bg-gradient-to-br from-pink-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-                    <img src={kid} className="w-12 h-12 text-white" alt="kid">
+                    <img src="/assets/kid.png" className="w-12 h-12 text-white" alt="kid">
                      
                     </img>
                   </div>

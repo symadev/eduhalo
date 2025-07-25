@@ -3,7 +3,7 @@ import axios from "axios";
 
 const UseAxiosPublic = () => {
      const axiosSecure = axios.create({
-        baseURL:'http://localhost:4000'
+        baseURL:'https://edu-server-ten.vercel.app'
     })
     return axiosSecure;
 };
