@@ -57,7 +57,7 @@ const Works = () => {
               {/* Main image container */}
               <div className=" transform hover:scale-105 transition-transform duration-300">
                 <img
-                  src="/assets/teacher.png"
+                  src="/assets/teacher.png" 
                   alt="How it works illustration"
                   className="w-full h-full object-contain"
                 />
