@@ -9,7 +9,7 @@
 ---
 ## 📘 About
 
-**EduHalo** is an intelligent and modern school management system built using the **MERN Stack** and **GraphQL**. The platform empowers **admins**, **teachers**, and **parents** to stay connected through a centralized and interactive system.
+**EduHalo** is an Smart Homework & Attendance Tracker for Parents & Teachers built using the **MERN Stack** and **GraphQL**. The platform empowers **admins**, **teachers**, and **parents** to stay connected through a centralized and interactive system.
 
 - Admins can manage teachers, parents, and student assignments.
 - Teachers can upload homework, track attendance, and publish results.
