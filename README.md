@@ -1,4 +1,4 @@
-🏫 EduHalo – Intelligent School Management System
+## 🏫 EduHalo – Smart Homework & Attendance Tracker for Parents & Teachers
 
 
 
